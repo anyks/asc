@@ -5361,8 +5361,6 @@ int main(int argc, char * argv[]) noexcept {
 						if(debug > 0){
 							// Очищаем предыдущий прогресс-бар
 							pss.clear();
-							// Устанавливаем название файла
-							pss.description(value);
 							// Устанавливаем заголовки прогресс-бара
 							pss.title("Read words", "Read words, is done");
 							// Выводим индикатор прогресс-бара
