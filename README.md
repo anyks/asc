@@ -2,31 +2,31 @@
 
 # ANYKS Spell-checker (ASC) C++11
 
-- [Описание проекта](...)
-- [Список возможностей](...)
-- [Зависимости](...)
-- [Сборка проекта](...)
-    - [Клонирование проекта](...)
-    - [Linux и FreeBSD](...)
-    - [MacOS X](...)
-- [Готовые словари](...)
-- [Тестирование](...)
-    - [Материалы использовавшиеся в тестировании](...)
-- [Форматы файлов](...)
-    - [Arpa](...)
-    - [Vocab](...)
-        - [Описание](...)
-    - [Файл похожих букв в разных словарях](...)
-    - [Файл списка аббревиатур](...)
-    - [Файл списка доменных зон](...)
-    - [Формат скрипта python предобработки полученных слов](...)
-    - [Формат скрипта python определения собственных токенов слов](...)
-    - [Формат скрипта python стемминга](...)
-    - [Переменные окружения](...)
-- [Примеры](...)
-    - [Информация о бинарном словаре](...)
-    - [Обучение](...)
-    - [Исправление ошибок](...)
+- [Описание проекта](https://github.com/anyks/asc#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
+- [Список возможностей](https://github.com/anyks/asc#%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9)
+- [Зависимости](https://github.com/anyks/asc#%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)
+- [Сборка проекта](https://github.com/anyks/asc#%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
+    - [Клонирование проекта](https://github.com/anyks/asc#%D0%BA%D0%BB%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
+    - [Linux и FreeBSD](https://github.com/anyks/asc#linux-%D0%B8-freebsd)
+    - [MacOS X](https://github.com/anyks/asc#macos-x)
+- [Готовые словари](https://github.com/anyks/asc#%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D1%8B%D0%B5-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8)
+- [Тестирование](https://github.com/anyks/asc#%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
+    - [Материалы использовавшиеся в тестировании](https://github.com/anyks/asc#%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%B2%D1%88%D0%B8%D0%B5%D1%81%D1%8F-%D0%B2-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8)
+- [Форматы файлов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D1%8B-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2)
+    - [Arpa](https://github.com/anyks/asc#arpa)
+    - [Vocab](https://github.com/anyks/asc#vocab)
+        - [Описание](https://github.com/anyks/asc#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5)
+    - [Файл похожих букв в разных словарях](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D0%BF%D0%BE%D1%85%D0%BE%D0%B6%D0%B8%D1%85-%D0%B1%D1%83%D0%BA%D0%B2-%D0%B2-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8F%D1%85)
+    - [Файл списка аббревиатур](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B0%D0%B1%D0%B1%D1%80%D0%B5%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80)
+    - [Файл списка доменных зон](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%B7%D0%BE%D0%BD)
+    - [Формат скрипта python предобработки полученных слов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D0%BF%D1%80%D0%B5%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D0%BB%D0%BE%D0%B2)
+    - [Формат скрипта python определения собственных токенов слов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%BE%D0%B2-%D1%81%D0%BB%D0%BE%D0%B2)
+    - [Пример скрипта python стемминга](https://github.com/anyks/asc#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D1%81%D1%82%D0%B5%D0%BC%D0%BC%D0%B8%D0%BD%D0%B3%D0%B0)
+    - [Переменные окружения](https://github.com/anyks/asc#%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F)
+- [Примеры](https://github.com/anyks/asc#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B)
+    - [Информация о бинарном словаре](https://github.com/anyks/asc#%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F-%D0%BE-%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D0%BE%D0%BC-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B5)
+    - [Обучение](https://github.com/anyks/asc#%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)
+    - [Исправление ошибок](https://github.com/anyks/asc#%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA)
 - [Лицензия](https://github.com/anyks/asc/blob/master/site#%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F)
 - [Контакты](https://github.com/anyks/asc/blob/master/site#%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B)
 
@@ -90,7 +90,7 @@ $ make
 | Название                                                               | Размер (Гб) | Оперативная память (Гб) | Размер N-грамм | Язык  |
 |------------------------------------------------------------------------|-------------|-------------------------|----------------|-------|
 | [wittenbell-3-big.asc](https://cloud.mail.ru/public/2b9E/sz9b8YGJ1)    | 1.97        | 15.6                    | 3              | RU    |
-| [wittenbell-3-middle.asc](https://cloud.mail.ru/public/jcAP/4vyE2KujD) | 1.32        | 9.7                     | 3              | RU    |
+| [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz) | 1.24        | 9.7                     | 3              | RU    |
 | [mkneserney-3-middle.asc](https://cloud.mail.ru/public/3SBP/35WJFKFyd) | 1.33        | 9.7                     | 3              | RU    |
 | [wittenbell-3-single.asc](https://cloud.mail.ru/public/21jt/YEW493XQa) | 0.772       | 5.14                    | 3              | RU    |
 | [wittenbell-5-single.asc](https://cloud.mail.ru/public/2qzd/5jmZdbfue) | 1.45        | 10.7                    | 5              | RU    |
@@ -98,7 +98,7 @@ $ make
 ## Тестирование
 
 Для проверки работы системы, использовались данные соревнования [«исправления опечаток» 2016 года от Dialog21](http://www.dialog-21.ru/evaluation/2016/spelling_correction).
-Для тестирования использовался обученный бинарный словарь: [wittenbell-3-middle.asc](https://cloud.mail.ru/public/jcAP/4vyE2KujD)
+Для тестирования использовался обученный бинарный словарь: [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz)
 
 | №                              | Precision | Recall | FMeasure |
 |--------------------------------|-----------|--------|----------|
