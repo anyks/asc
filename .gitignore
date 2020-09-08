@@ -6,6 +6,10 @@
 # Node artifact files
 node_modules/
 dist/
+bin/
+
+# Script version
+ver.sh
 
 # Compiled Java class files
 *.class
