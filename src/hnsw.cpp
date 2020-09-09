@@ -168,7 +168,7 @@ const pair <vector <labeltype>, vector <float>> anyks::Hnsw::query(const vector 
 		// Если количество ядер не установлено, устанавливаем по дефолту
 		if(threads <= 0) threads = this->threads;
 		// Если количество строк меньше количества ядер * 4, тогда переводим всё на одно ядро
-		if(rows <= (threads * 4)) threads = 1;
+		if(rows <= size_t(threads * 4)) threads = 1;
 		// Создаем массив дистанций
 		result.second = vector <float> (rows * k);
 		// Создаем массив данных
@@ -432,7 +432,7 @@ void anyks::Hnsw::add(const vector <vector <float>> & input, const vector <size_
 	// Если количество фич не равно размерности вектора
 	if(features != this->dim) throw runtime_error("Wrong dimensionality of the vectors.");
 	// Если количество строк меньше количества ядер * 4, тогда переводим всё на одно ядро
-	if(rows <= (threads * 4)) threads = 1;
+	if(rows <= size_t(threads * 4)) threads = 1;
 	{
 		// Начало работы
 		u_short start = 0;
