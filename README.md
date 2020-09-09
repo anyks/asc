@@ -385,7 +385,7 @@ def run(word, lang):
 ```bash
 $ export ASC_R-ARPA=./lm.arpa
 
-$ export ASC_R_BIN=./wittenbell-3-single.asc
+$ export ASC_R-BIN=./wittenbell-3-single.asc
 ```
 
 - Пример параметров в JSON формате
