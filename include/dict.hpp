@@ -222,6 +222,17 @@ namespace anyks {
 			void setUWords(const map <size_t, size_t> & words) noexcept;
 		public:
 			/**
+			 * setLMethod Метод установки функции получения леммы
+			 * @param fn функция для установки
+			 */
+			void setLMethod(stemmer_t::stemming_t fn) noexcept;
+			/**
+			 * setVMethod Метод установки функции подбора вариантов
+			 * @param fn функция для установки
+			 */
+			void setVMethod(stemmer_t::variants_t fn) noexcept;
+		public:
+			/**
 			 * setALM Метод установки языковой модели
 			 * @param alm объект языковой модели
 			 */

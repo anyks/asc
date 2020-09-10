@@ -258,7 +258,7 @@ void anyks::ASCb::read() noexcept {
 					// Устанавливаем пользовательский токен
 					this->alm->setUserToken(token);
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Увеличиваем индекс добавленного токена
 						index++;
 						// Подсчитываем статус выполнения
@@ -267,11 +267,15 @@ void anyks::ASCb::read() noexcept {
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если прогресс-бар передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Loading user token", status);
 						}
 					}
 				}
@@ -282,7 +286,8 @@ void anyks::ASCb::read() noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Loading user token", 100);
 			}{
 				// Буфер бинарных данных словаря
 				vector <char> buffer;
@@ -311,7 +316,8 @@ void anyks::ASCb::read() noexcept {
 								case 1: this->pss->update(status); break;
 								case 2: this->pss->status(status); break;
 							}
-						}
+						// Выводим индикацию во внешнюю функцию
+						} else this->progressFn(L"Loading dictionary", status);
 					});
 					// Если объект индикатора загрузки передан
 					if(this->pss != nullptr){
@@ -320,7 +326,8 @@ void anyks::ASCb::read() noexcept {
 							case 1: this->pss->update(100); break;
 							case 2: this->pss->status(100); break;
 						}
-					}
+					// Выводим индикацию во внешнюю функцию
+					} else this->progressFn(L"Loading dictionary", 100);
 					// Очищаем буфер данных
 					buffer.clear();
 					/*
@@ -352,7 +359,8 @@ void anyks::ASCb::read() noexcept {
 								case 1: this->pss->update(status); break;
 								case 2: this->pss->status(status); break;
 							}
-						}
+						// Выводим индикацию во внешнюю функцию
+						} else this->progressFn(L"Loading Bloom filter", status);
 					});
 					// Если объект индикатора загрузки передан
 					if(this->pss != nullptr){
@@ -361,7 +369,8 @@ void anyks::ASCb::read() noexcept {
 							case 1: this->pss->update(100); break;
 							case 2: this->pss->status(100); break;
 						}
-					}
+					// Выводим индикацию во внешнюю функцию
+					} else this->progressFn(L"Loading Bloom filter", 100);
 					// Если отладка включена, выводим индикатор загрузки
 					if((this->debug > 0) && (this->pss != nullptr)){
 						// Очищаем предыдущий прогресс-бар
@@ -383,7 +392,8 @@ void anyks::ASCb::read() noexcept {
 								case 1: this->pss->update(status); break;
 								case 2: this->pss->status(status); break;
 							}
-						}
+						// Выводим индикацию во внешнюю функцию
+						} else this->progressFn(L"Loading stemming", status);
 					});
 					// Если объект индикатора загрузки передан
 					if(this->pss != nullptr){
@@ -392,7 +402,8 @@ void anyks::ASCb::read() noexcept {
 							case 1: this->pss->update(100); break;
 							case 2: this->pss->status(100); break;
 						}
-					}
+					// Выводим индикацию во внешнюю функцию
+					} else this->progressFn(L"Loading stemming", 100);
 				// Сообщаем, что загрузить данные словаря не получилось
 				} else {
 					// Выводим сообщение об ошибке
@@ -428,18 +439,22 @@ void anyks::ASCb::read() noexcept {
 					// Если буфер данных существует
 					if(!buffer.empty()) this->alm->setBin(buffer);
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(i / double(countAlm) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Loading language model", status);
 						}
 					}
 				}
@@ -450,7 +465,8 @@ void anyks::ASCb::read() noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Loading language model", 100);
 			}
 			// Если количество альтернативных слов получено
 			if(countAltWords > 0){
@@ -479,18 +495,22 @@ void anyks::ASCb::read() noexcept {
 					// Если список альтернативных слов получен
 					if(words.size() == 2) this->dict->addAlt(this->alphabet->convert(words.front()), this->alphabet->convert(words.back()));
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(i / double(countAltWords) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Loading alternative words", status);
 						}
 					}
 				}
@@ -501,7 +521,8 @@ void anyks::ASCb::read() noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Loading alternative words", 100);
 			}
 			// Если список букв для исправления слов из смешанных алфавитов получен
 			if(countSubstitutes > 0){
@@ -532,18 +553,22 @@ void anyks::ASCb::read() noexcept {
 					// Если слова получены, добавляем полученные буквы
 					if(!words.empty()) letters.emplace(words.front(), words.back());
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(i / double(countSubstitutes) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Loading substitutes letters", status);
 						}
 					}
 				}
@@ -558,7 +583,8 @@ void anyks::ASCb::read() noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Loading substitutes letters", 100);
 			}
 			// Если список доменных зон получен, устанавливаем его
 			if(!domainZones.empty()) this->alphabet->setzones(domainZones);
@@ -646,7 +672,8 @@ void anyks::ASCb::write() const noexcept {
 						case 1: this->pss->update(status); break;
 						case 2: this->pss->status(status); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Dump dictionary", status);
 			});
 			// Если буфер данных получен
 			if(!buffer.empty()){
@@ -670,7 +697,8 @@ void anyks::ASCb::write() const noexcept {
 					case 1: this->pss->update(100); break;
 					case 2: this->pss->status(100); break;
 				}
-			}
+			// Выводим индикацию во внешнюю функцию
+			} else this->progressFn(L"Dump dictionary", 100);
 		}{
 			// Параметры индикаторы процесса
 			size_t index = 0, status = 0, rate = 0, count = 0;
@@ -705,18 +733,22 @@ void anyks::ASCb::write() const noexcept {
 					// Увеличиваем индекс обработанных букв
 					index++;
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(index / double(count) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Dump alternative letters", status);
 						}
 					}
 				}
@@ -727,7 +759,8 @@ void anyks::ASCb::write() const noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Dump alternative letters", 100);
 			}
 			// Если список альтернативных слов получен
 			if(!this->altLetters.empty() && !this->altWords.empty()){
@@ -760,18 +793,22 @@ void anyks::ASCb::write() const noexcept {
 					// Увеличиваем индекс обработанных слов
 					index++;
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(index / double(count) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Dump alternative words", status);
 						}
 					}
 				}
@@ -782,7 +819,8 @@ void anyks::ASCb::write() const noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Dump alternative words", 100);
 			}
 		}{
 			// Параметры индикаторы процесса и количество N-грамм
@@ -814,7 +852,8 @@ void anyks::ASCb::write() const noexcept {
 						case 1: this->pss->update(status); break;
 						case 2: this->pss->status(status); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Dump language model", status);
 			});
 			// Записываем количество записанных буферов
 			this->aspl->set("countAlm", index);
@@ -827,7 +866,8 @@ void anyks::ASCb::write() const noexcept {
 					case 1: this->pss->update(100); break;
 					case 2: this->pss->status(100); break;
 				}
-			}
+			// Выводим индикацию во внешнюю функцию
+			} else this->progressFn(L"Dump language model", 100);
 		}{
 			// Устанавливаем размер словаря
 			this->aspl->set("sizeAlm", this->alm->getSize());
@@ -930,18 +970,22 @@ void anyks::ASCb::write() const noexcept {
 					// Увеличиваем индекс обработанных слов
 					index++;
 					// Если отладка включена
-					if((this->debug > 0) && (this->pss != nullptr)){
+					if(this->debug > 0){
 						// Подсчитываем статус выполнения
 						status = u_short(index / double(count) * 100.0);
 						// Если процентное соотношение изменилось
 						if(rate != status){
 							// Запоминаем текущее процентное соотношение
 							rate = status;
-							// Отображаем ход процесса
-							switch(this->debug){
-								case 1: this->pss->update(status); break;
-								case 2: this->pss->status(status); break;
-							}
+							// Если объект индикатора загрузки передан
+							if(this->pss != nullptr){
+								// Отображаем ход процесса
+								switch(this->debug){
+									case 1: this->pss->update(status); break;
+									case 2: this->pss->status(status); break;
+								}
+							// Выводим индикацию во внешнюю функцию
+							} else this->progressFn(L"Dump substitutes letters", status);
 						}
 					}
 				}
@@ -952,7 +996,8 @@ void anyks::ASCb::write() const noexcept {
 						case 1: this->pss->update(100); break;
 						case 2: this->pss->status(100); break;
 					}
-				}
+				// Выводим индикацию во внешнюю функцию
+				} else this->progressFn(L"Dump substitutes letters", 100);
 			}
 		}
 		// Выполняем запись данных словаря
@@ -1386,6 +1431,27 @@ void anyks::ASCb::setFilename(const string & filename) noexcept {
 	if(!filename.empty()) this->filename = filename;
 }
 /**
+ * setProgressFn Метод установки внешнего прогресс-бара
+ * @param fn функция внешнего прогресс-бара
+ */
+void anyks::ASCb::setProgressFn(function <void (const wstring &, const u_short)> fn) noexcept {
+	// Зануляем основной пргресс-бар
+	this->pss = nullptr;
+	// Устанавливаем функцию внешнего прогресс-бара
+	this->progressFn = fn;
+}
+/**
+ * ASCb Конструктор
+ */
+anyks::ASCb::ASCb() noexcept {
+	// Устанавливаем внешнюю болванку прогресс-бара
+	this->progressFn = [](const wstring & text, const u_short status) noexcept {
+		// Блокируем варнинги на неиспользуемые переменные
+		(void) text;
+		(void) status;
+	};
+}
+/**
  * ASCb Конструктор
  * @param filename адрес файла словаря
  * @param password пароль бинарного словаря
@@ -1398,6 +1464,12 @@ anyks::ASCb::ASCb(const string & filename, const string & password, const char *
 	this->setFilename(filename);
 	// Устанавливаем пароль шифрования словаря
 	this->setPassword(password);
+	// Устанавливаем внешнюю болванку прогресс-бара
+	this->progressFn = [](const wstring & text, const u_short status) noexcept {
+		// Блокируем варнинги на неиспользуемые переменные
+		(void) text;
+		(void) status;
+	};
 }
 /**
  * ~ASCb Деструктор

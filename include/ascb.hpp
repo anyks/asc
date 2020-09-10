@@ -65,6 +65,8 @@ namespace anyks {
 			map <wchar_t, wchar_t> altLetters;
 			// Список альтернативных слов
 			unordered_map <string, string> altWords;
+			// Функция прогресс бара
+			function <void (const wstring &, const u_short)> progressFn = nullptr;
 		private:
 			// Объект языковой модели
 			alm_t * alm = nullptr;
@@ -177,11 +179,16 @@ namespace anyks {
 			 * @param filename адрес файла словаря
 			 */
 			void setFilename(const string & filename) noexcept;
+			/**
+			 * setProgressFn Метод установки внешнего прогресс-бара
+			 * @param fn функция внешнего прогресс-бара
+			 */
+			void setProgressFn(function <void (const wstring &, const u_short)> fn) noexcept;
 		public:
 			/**
 			 * ASCb Конструктор
 			 */
-			ASCb() noexcept {};
+			ASCb() noexcept;
 			/**
 			 * ASCb Конструктор
 			 * @param filename адрес файла словаря

@@ -59,18 +59,18 @@ const bool anyks::Stemmer::check(const wstring & word) const noexcept {
 	return result;
 }
 /**
- * setLFunction Метод установки функции получения леммы
+ * setLMethod Метод установки функции получения леммы
  * @param fn функция для установки
  */
-void anyks::Stemmer::setLFunction(lemma_t fn) noexcept {
+void anyks::Stemmer::setLMethod(stemming_t fn) noexcept {
 	// Если функция передана, устанавливаем её
 	if(fn != nullptr) this->lemmaFn = fn;
 }
 /**
- * setVFunction Метод установки функции подбора вариантов
+ * setVMethod Метод установки функции подбора вариантов
  * @param fn функция для установки
  */
-void anyks::Stemmer::setVFunction(variants_t fn) noexcept {
+void anyks::Stemmer::setVMethod(variants_t fn) noexcept {
 	// Если функция передана, устанавливаем её
 	if(fn != nullptr) this->variantsFn = fn;
 }

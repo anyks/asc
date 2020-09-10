@@ -37,8 +37,9 @@ namespace anyks {
 		private:
 			// Мютекс для блокировки потока
 			mutable mutex locker;
+		public:
 			// Тип функции для извлечения леммы
-			typedef function <const wstring (const wstring &, const wstring &)> lemma_t;
+			typedef function <const wstring (const wstring &, const wstring &)> stemming_t;
 			// Тип функции для подбора вариантов слова
 			typedef function <const list <wstring> (const wstring &, const wstring &)> variants_t;
 		private:
@@ -48,7 +49,7 @@ namespace anyks {
 			size_t variantsScript = 0;
 		private:
 			// Функция для получения леммы
-			lemma_t lemmaFn = nullptr;
+			stemming_t lemmaFn = nullptr;
 			// Функция для подбора вариантов слова
 			variants_t variantsFn = nullptr;
 		private:
@@ -67,15 +68,15 @@ namespace anyks {
 			const bool check(const wstring & word) const noexcept;
 		public:
 			/**
-			 * setLFunction Метод установки функции получения леммы
+			 * setLMethod Метод установки функции получения леммы
 			 * @param fn функция для установки
 			 */
-			void setLFunction(lemma_t fn) noexcept;
+			void setLMethod(stemming_t fn) noexcept;
 			/**
-			 * setVFunction Метод установки функции подбора вариантов
+			 * setVMethod Метод установки функции подбора вариантов
 			 * @param fn функция для установки
 			 */
-			void setVFunction(variants_t fn) noexcept;
+			void setVMethod(variants_t fn) noexcept;
 			/**
 			 * setLScript Метод установки скрипта лемматизатора
 			 * @param script python скрипт для установки

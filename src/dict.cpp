@@ -503,6 +503,22 @@ void anyks::Dict::setUWords(const map <size_t, size_t> & words) noexcept {
 	this->alt.setUWords(words);
 }
 /**
+ * setLMethod Метод установки функции получения леммы
+ * @param fn функция для установки
+ */
+void anyks::Dict::setLMethod(stemmer_t::stemming_t fn) noexcept {
+	// Устанавливаем функцию стемминга
+	if(fn != nullptr) this->stemmer->setLMethod(fn);
+}
+/**
+ * setVMethod Метод установки функции подбора вариантов
+ * @param fn функция для установки
+ */
+void anyks::Dict::setVMethod(stemmer_t::variants_t fn) noexcept {
+	// Устанавливаем функцию подбора вариантов
+	if(fn != nullptr) this->stemmer->setVMethod(fn);
+}
+/**
  * setALM Метод установки языковой модели
  * @param alm объект языковой модели
  */

@@ -3389,7 +3389,7 @@ int main(int argc, char * argv[]) noexcept {
 					// Если адрес скрипта получен
 					if((value = env.get("word-script")) != nullptr) toolkit.setWordScript(value);
 					// Выполняем инициализацию алгоритма сглаживания
-					if(env.is("smoothing")) {
+					if(env.is("smoothing")){
 						// Дополнительный коэффициент алгоритма сглаживания
 						double mod = 0.0;
 						// Если алгоритм сглаживания ConstDiscount или AddSmooth, запрашиваем дополнительные параметры
@@ -3442,7 +3442,7 @@ int main(int argc, char * argv[]) noexcept {
 							);
 							// Устанавливаем путь назначения
 							if((value = env.get("train-intermed-dest")) != nullptr) collector.setDest(value);
-							// Выполняем чтение данных файла
+							// Выполняем чтение данных каталога
 							collector.readDir(path, ext);
 						// Иначе выполняем сборку обычным способом
 						} else {
