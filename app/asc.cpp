@@ -3813,9 +3813,9 @@ int main(int argc, char * argv[]) noexcept {
 								const string & text = config.dump(4);
 								// Если текст получен, записываем данные в файл
 								if(!text.empty()) file.write(text.data(), text.size());
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 					// Если файл для сохранения слов передан
@@ -3984,7 +3984,7 @@ int main(int argc, char * argv[]) noexcept {
 								case 2: pss.status(); break;
 							}
 						}
-						// Выполняем модификацию файла
+						// Выполняем запись данных аббревиатур в файл
 						tokenizer.writeSuffix(value, [debug, &pss](const u_short status) noexcept {
 							// Отображаем ход процесса
 							switch(debug){
@@ -4053,9 +4053,9 @@ int main(int argc, char * argv[]) noexcept {
 									case 1: pss.update(100); break;
 									case 2: pss.status(100); break;
 								}
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 					// Если адрес файла токенов которые нужно идентифицировать как <unk>
@@ -4113,9 +4113,9 @@ int main(int argc, char * argv[]) noexcept {
 									case 1: pss.update(100); break;
 									case 2: pss.status(100); break;
 								}
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 					// Если адрес файла не идентифицируемых токенов получен
@@ -4173,9 +4173,9 @@ int main(int argc, char * argv[]) noexcept {
 									case 1: pss.update(100); break;
 									case 2: pss.status(100); break;
 								}
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 					// Если адрес файла чёрного списка получен
@@ -4233,9 +4233,9 @@ int main(int argc, char * argv[]) noexcept {
 									case 1: pss.update(100); break;
 									case 2: pss.status(100); break;
 								}
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 					// Если адрес файла белого списка идентификаторв получен
@@ -4293,9 +4293,9 @@ int main(int argc, char * argv[]) noexcept {
 									case 1: pss.update(100); break;
 									case 2: pss.status(100); break;
 								}
+								// Закрываем файл
+								file.close();
 							}
-							// Закрываем файл
-							file.close();
 						}
 					}
 				}
