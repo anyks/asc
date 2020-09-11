@@ -629,6 +629,14 @@ void anyks::Dict::setLictype(const wstring & type) noexcept {
 	if(!type.empty()) this->params.lictype = type;
 }
 /**
+ * unsetOption Метод отключения опции модуля
+ * @param option опция для отключения
+ */
+void anyks::Dict::unsetOption(const options_t option) noexcept {
+	// Устанавливаем опции
+	this->options.reset((u_short) option);
+}
+/**
  * setLictext Метод установки лицензионной информации словаря
  * @param license лицензионная информация словаря
  */

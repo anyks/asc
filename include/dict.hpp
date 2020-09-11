@@ -288,6 +288,11 @@ namespace anyks {
 			 */
 			void setLictype(const wstring & type) noexcept;
 			/**
+			 * unsetOption Метод отключения опции модуля
+			 * @param option опция для отключения
+			 */
+			void unsetOption(const options_t option) noexcept;
+			/**
 			 * setLictext Метод установки лицензионной информации словаря
 			 * @param license лицензионная информация словаря
 			 */
