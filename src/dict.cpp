@@ -537,10 +537,13 @@ void anyks::Dict::setALM(alm_t * alm) noexcept {
 			// Добавляем альтернативное слово
 			this->alt.add(word, true, idw);
 		});
-		// Получаем объект внешний объект питона
-		const python_t * obj = this->stemmer->getPythonObj();
-		// Устанавливаем объект питона
-		if(obj != nullptr) this->alm->setPythonObj(const_cast <python_t *> (obj));
+		// Если флаг запрещения использовать Python не установлен
+		if(!this->isOption(options_t::nopython)){
+			// Получаем объект внешний объект питона
+			const python_t * obj = this->stemmer->getPythonObj();
+			// Устанавливаем объект питона
+			if(obj != nullptr) this->alm->setPythonObj(const_cast <python_t *> (obj));
+		}
 	}
 }
 /**
@@ -589,7 +592,7 @@ void anyks::Dict::setLogfile(const char * logfile) noexcept {
  */
 void anyks::Dict::setOption(const options_t option) noexcept {
 	// Если это режим отладки
-	if(option == options_t::debug){
+	if((option == options_t::debug) && !this->isOption(options_t::nopython)){
 		// Устанавливаем режим отладки модуля питона
 		const_cast <python_t *> (this->stemmer->getPythonObj())->setDebug();
 	}

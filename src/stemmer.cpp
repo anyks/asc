@@ -80,7 +80,7 @@ void anyks::Stemmer::setVMethod(variants_t fn) noexcept {
  */
 void anyks::Stemmer::setLScript(const string & script) noexcept {
 	// Если скрипт передан, устанавливаем его
-	if(!script.empty()) this->lemmaScript = this->script->add(script, 2);
+	if(!script.empty() && (this->script != nullptr)) this->lemmaScript = this->script->add(script, 2);
 }
 /**
  * setVScript Метод установки скрипта подбора вариантов
@@ -88,7 +88,7 @@ void anyks::Stemmer::setLScript(const string & script) noexcept {
  */
 void anyks::Stemmer::setVScript(const string & script) noexcept {
 	// Если скрипт передан, устанавливаем его
-	if(!script.empty()) this->variantsScript = this->script->add(script, 2);
+	if(!script.empty() && (this->script != nullptr)) this->variantsScript = this->script->add(script, 2);
 }
 /**
  * setTokenizer Метод установки токенизатора
@@ -97,15 +97,18 @@ void anyks::Stemmer::setVScript(const string & script) noexcept {
 void anyks::Stemmer::setTokenizer(const tokenizer_t * tokenizer){
 	// Если токенизатор передан
 	if(tokenizer != nullptr){
-		try {
-			// Устанавливаем модуль генератора
-			this->tokenizer = tokenizer;
-			// Создаем объект модуля выполнения скриптов
-			if(this->script == nullptr) this->script = new python_t(this->tokenizer);
-		// Если происходит ошибка то игнорируем её
-		} catch(const bad_alloc&) {
-			// Выходим из приложения
-			exit(EXIT_FAILURE);
+		// Устанавливаем модуль генератора
+		this->tokenizer = tokenizer;
+		// Если внешняя функция не установлена
+		if((this->lemmaFn == nullptr) && (this->variantsFn == nullptr) && (this->script == nullptr)){
+			try {
+				// Создаем объект модуля выполнения скриптов
+				this->script = new python_t(this->tokenizer);
+			// Если происходит ошибка то игнорируем её
+			} catch(const bad_alloc&) {
+				// Выходим из приложения
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 }
@@ -142,17 +145,18 @@ const wstring anyks::Stemmer::lemma(const wstring & word, const wstring & code) 
 		if((code.compare(L"en") != 0) && this->alphabet->isLatian(word))
 			// Устанавливаем код языка, по умолчанию
 			const_cast <wstring *> (&code)->assign(L"en");
-		// Выполняем скрипт для получения вариантов
-		result = (
-			this->lemmaFn != nullptr ?
-			this->lemmaFn(word, code) :
-			this->script->run(
+		// Если внешняя функция установлена
+		if(this->lemmaFn != nullptr) result = this->lemmaFn(word, code);
+		// Если скрипт Python установлен
+		else if(this->script != nullptr){
+			// Выполняем скрипт для получения вариантов
+			result = this->script->run(
 				this->lemmaScript, {
 					this->alphabet->convert(word),
 					this->alphabet->convert(code)
 				}
-			)
-		);
+			);
+		}
 		// Разблокируем остальные потоки
 		this->locker.unlock();
 	}
@@ -179,7 +183,7 @@ const list <wstring> anyks::Stemmer::variants(const wstring & word, const wstrin
 		// Если функция подборки вариантов установлена
 		if(this->variantsFn != nullptr) result = this->variantsFn(word, code);
 		// Если функция подборки вариантов не передана
-		else {
+		else if(this->script != nullptr) {
 			// Выполняем скрипт для получения вариантов
 			const wstring & res = this->script->run(
 				this->variantsScript, {
