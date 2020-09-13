@@ -229,13 +229,13 @@ void anyks::ASCb::read() noexcept {
 			// Если опции языковой модели получены
 			if(optionsAlm > 0){
 				// Получаем опции языковой модели
-				bitset <5> options = optionsAlm;
+				bitset <4> options = optionsAlm;
 				// Если установлена опция - использования только слов из белого списка
-				if(options.test(2)) this->alm->setOption(alm_t::options_t::onlyGood);
+				if(options.test(1)) this->alm->setOption(alm_t::options_t::onlyGood);
 				// Если установлена опция - детектирования слова из смешанных словарей
-				if(options.test(3)) this->alm->setOption(alm_t::options_t::mixdicts);
+				if(options.test(2)) this->alm->setOption(alm_t::options_t::mixdicts);
 				// Если установлена опция - разрешающая загружать n-граммы из arpa так-как они есть
-				if(options.test(4)) this->alm->setOption(alm_t::options_t::confidence);
+				if(options.test(3)) this->alm->setOption(alm_t::options_t::confidence);
 			}
 			// Если список пользовательских токенов получен
 			if(!userTokensAlm.empty()){
@@ -1229,17 +1229,17 @@ void anyks::ASCb::info() const noexcept {
 			// Если опции языковой модели получены, устанавливаем
 			if(optionsAlm > 0){
 				// Получаем опции языковой модели
-				bitset <5> options = optionsAlm;
+				bitset <4> options = optionsAlm;
 				// Если установлена опция - использования только слов из белого списка
-				if(options.test(2)) info.append("* Only good words: YES\r\n");
+				if(options.test(1)) info.append("* Only good words: YES\r\n");
 				// Если опция не установлена
 				else info.append("* Only good words: NO\r\n");
 				// Если установлена опция - детектирования слова из смешанных словарей
-				if(options.test(3)) info.append("* Mix words in dicts: YES\r\n");
+				if(options.test(2)) info.append("* Mix words in dicts: YES\r\n");
 				// Если опция не установлена
 				else info.append("* Mix words in dicts: NO\r\n");
 				// Если установлена опция - разрешающая загружать n-граммы из arpa так-как они есть
-				if(options.test(4)) info.append("* Confidence arpa: YES\r\n\r\n");
+				if(options.test(3)) info.append("* Confidence arpa: YES\r\n\r\n");
 				// Если опция не установлена
 				else info.append("* Confidence arpa: NO\r\n\r\n");
 			}

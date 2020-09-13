@@ -537,13 +537,13 @@ void anyks::Dict::setALM(alm_t * alm) noexcept {
 			// Добавляем альтернативное слово
 			this->alt.add(word, true, idw);
 		});
-		// Если флаг запрещения использовать Python не установлен
-		if(!this->isOption(options_t::nopython)){
-			// Получаем объект внешний объект питона
-			const python_t * obj = this->stemmer->getPythonObj();
-			// Устанавливаем объект питона
-			if(obj != nullptr) this->alm->setPythonObj(const_cast <python_t *> (obj));
-		}
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
+		// Получаем объект внешний объект питона
+		const python_t * obj = this->stemmer->getPythonObj();
+		// Устанавливаем объект питона
+		if(obj != nullptr) this->alm->setPythonObj(const_cast <python_t *> (obj));
+#endif
 	}
 }
 /**
@@ -591,11 +591,14 @@ void anyks::Dict::setLogfile(const char * logfile) noexcept {
  * @param option опция для установки
  */
 void anyks::Dict::setOption(const options_t option) noexcept {
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 	// Если это режим отладки
-	if((option == options_t::debug) && !this->isOption(options_t::nopython)){
+	if(option == options_t::debug){
 		// Устанавливаем режим отладки модуля питона
 		const_cast <python_t *> (this->stemmer->getPythonObj())->setDebug();
 	}
+#endif
 	// Устанавливаем опции
 	this->options.set((u_short) option);
 }
@@ -1674,13 +1677,11 @@ const list <wstring> anyks::Dict::variants(const wstring & word) const noexcept 
 			wstring words = L"";
 			// Переходим по всему списку вариантов
 			for(auto & item : result){
+				// Если слово уже не пустое, добавляем разделитель
+				if(!words.empty()) words.append(L"|");
 				// Добавляем в список вариантов, полученный вариант
 				words.append(item);
-				// Добавляем разделитель
-				words.append(L"|");
 			}
-			// Удаляем последний элемент
-			words.pop_back();
 			// Выводим основное сообщение отладки
 			this->alphabet->log("stemming: [%ls => %ls]\r\n", alphabet_t::log_t::info, this->logfile, word.c_str(), words.c_str());
 		}

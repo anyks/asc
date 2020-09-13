@@ -54,7 +54,6 @@ namespace anyks {
 			enum class options_t : u_short {
 				debug,    // Флаг режима отладки
 				bloom,    // Флаг разрешающий использовать фильтр Блума
-				nopython, // Флаг запрещающий инициализацию питона
 				stemming, // Флаг активации стемминга
 				onlytypos // Флаг исправления только опечаток
 			};
@@ -115,7 +114,7 @@ namespace anyks {
 			// Идентификатор конца строки
 			wchar_t elid;
 			// Флаги параметров
-			bitset <5> options;
+			bitset <4> options;
 			// Размер эмбеддинга
 			u_short sizeEmbedding = 0;
 			// Количество вариантов для анализа

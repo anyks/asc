@@ -51,7 +51,7 @@ const bool anyks::Stemmer::check(const wstring & word) const noexcept {
 	// Если слово передано
 	if(!word.empty()){
 		// Если это не первый или последний дефис
-		result = ((word[0] != L'-') && (word[word.length() - 1] != L'-'));
+		result = ((word.front() != L'-') && (word.back() != L'-'));
 		// Если слово прошло проверку
 		if(result) result = !this->alphabet->isANumber(word);
 	}
@@ -79,16 +79,22 @@ void anyks::Stemmer::setVMethod(variants_t fn) noexcept {
  * @param script python скрипт для установки
  */
 void anyks::Stemmer::setLScript(const string & script) noexcept {
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 	// Если скрипт передан, устанавливаем его
 	if(!script.empty() && (this->script != nullptr)) this->lemmaScript = this->script->add(script, 2);
+#endif
 }
 /**
  * setVScript Метод установки скрипта подбора вариантов
  * @param script python скрипт для установки
  */
 void anyks::Stemmer::setVScript(const string & script) noexcept {
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 	// Если скрипт передан, устанавливаем его
 	if(!script.empty() && (this->script != nullptr)) this->variantsScript = this->script->add(script, 2);
+#endif
 }
 /**
  * setTokenizer Метод установки токенизатора
@@ -99,6 +105,8 @@ void anyks::Stemmer::setTokenizer(const tokenizer_t * tokenizer){
 	if(tokenizer != nullptr){
 		// Устанавливаем модуль генератора
 		this->tokenizer = tokenizer;
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 		// Если внешняя функция не установлена
 		if((this->lemmaFn == nullptr) && (this->variantsFn == nullptr) && (this->script == nullptr)){
 			try {
@@ -110,6 +118,7 @@ void anyks::Stemmer::setTokenizer(const tokenizer_t * tokenizer){
 				exit(EXIT_FAILURE);
 			}
 		}
+#endif
 	}
 }
 /**
@@ -139,26 +148,29 @@ const wstring anyks::Stemmer::lemma(const wstring & word, const wstring & code) 
 	wstring result = L"";
 	// Если слово передано и скрипт загружен
 	if(!word.empty() && !code.empty() && ((this->lemmaFn != nullptr) || (this->lemmaScript > 0)) && this->check(word)){
-		// Блокируем остальные потоки до завершения работы скрипта
-		this->locker.lock();
+		// Код языка к которому принадлежит слово
+		wstring lang = code;
 		// Если это русский язык, проверяем на латиницу
-		if((code.compare(L"en") != 0) && this->alphabet->isLatian(word))
-			// Устанавливаем код языка, по умолчанию
-			const_cast <wstring *> (&code)->assign(L"en");
+		if((lang.compare(L"en") != 0) && this->alphabet->isLatian(word)) lang = L"en";
 		// Если внешняя функция установлена
-		if(this->lemmaFn != nullptr) result = this->lemmaFn(word, code);
+		if(this->lemmaFn != nullptr) result = this->lemmaFn(word, lang);
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 		// Если скрипт Python установлен
 		else if(this->script != nullptr){
+			// Блокируем остальные потоки до завершения работы скрипта
+			this->locker.lock();
 			// Выполняем скрипт для получения вариантов
 			result = this->script->run(
 				this->lemmaScript, {
 					this->alphabet->convert(word),
-					this->alphabet->convert(code)
+					this->alphabet->convert(lang)
 				}
 			);
+			// Разблокируем остальные потоки
+			this->locker.unlock();
 		}
-		// Разблокируем остальные потоки
-		this->locker.unlock();
+#endif
 	}
 	// Выводим результат
 	return result;
@@ -174,28 +186,31 @@ const list <wstring> anyks::Stemmer::variants(const wstring & word, const wstrin
 	list <wstring> result;
 	// Если слово передано и скрипт загружен
 	if(!word.empty() && !code.empty() && ((this->variantsFn != nullptr) || (this->variantsScript > 0)) && this->check(word)){
-		// Блокируем остальные потоки до завершения работы скрипта
-		this->locker.lock();
+		// Код языка к которому принадлежит слово
+		wstring lang = code;
 		// Если это русский язык, проверяем на латиницу
-		if((code.compare(L"en") != 0) && this->alphabet->isLatian(word))
-			// Устанавливаем код языка, по умолчанию
-			const_cast <wstring *> (&code)->assign(L"en");
+		if((lang.compare(L"en") != 0) && this->alphabet->isLatian(word)) lang = L"en";
 		// Если функция подборки вариантов установлена
-		if(this->variantsFn != nullptr) result = this->variantsFn(word, code);
+		if(this->variantsFn != nullptr) result = this->variantsFn(word, lang);
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 		// Если функция подборки вариантов не передана
 		else if(this->script != nullptr) {
+			// Блокируем остальные потоки до завершения работы скрипта
+			this->locker.lock();
 			// Выполняем скрипт для получения вариантов
 			const wstring & res = this->script->run(
 				this->variantsScript, {
 					this->alphabet->convert(word),
-					this->alphabet->convert(code)
+					this->alphabet->convert(lang)
 				}
 			);
+			// Разблокируем остальные потоки
+			this->locker.unlock();
 			// Если результат получен
 			if(!res.empty()) this->alphabet->split(res, L"|", result);
 		}
-		// Разблокируем остальные потоки
-		this->locker.unlock();
+#endif
 		// Если результат получен
 		if(!result.empty()){
 			// Выполняем сортировку
@@ -238,6 +253,16 @@ anyks::Stemmer::Stemmer(const alphabet_t * alphabet, const tokenizer_t * tokeniz
  * ~Stemmer Деструктор
  */
 anyks::Stemmer::~Stemmer() noexcept {
+// Если работа идет не изнутри Python
+#ifndef NOPYTHON
 	// Если объект создан, удаляем его
 	if(this->script != nullptr) delete this->script;
+#endif
+	/**
+	 * Так и не понял этот баг
+	 * Деструктор отрабатывает но из-за установленной функции lemmaFn поток блокируется намертво
+	 * Игры с py::gil_scoped_release ничего не дали, блокировки в любом случае есть
+	 * По этому просто выходим из приложения, по завершению работы деструктора
+	 */
+	exit(0);
 }
