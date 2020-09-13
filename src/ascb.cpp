@@ -1152,9 +1152,9 @@ void anyks::ASCb::info() const noexcept {
 			// Запоминаем список суффиксов цифровых аббревиатур
 			this->aspl->getValues("suffixTokenizer", suffixTokenizer);
 			// Если алфавит получен, устанавливаем его
-			if(!alphabetDict.empty()) this->alphabet->set(alphabetDict);
+			if(!encrypted && !alphabetDict.empty()) this->alphabet->set(alphabetDict);
 			// Если локаль получена, устанавливаем её
-			if(!localeDict.empty()) this->alphabet->setlocale(localeDict);
+			if(!encrypted && !localeDict.empty()) this->alphabet->setlocale(localeDict);
 			// Если список альтернативных букв существует
 			if(countAltLetters > 0){
 				// Список альтернативных букв для записи
@@ -1181,9 +1181,9 @@ void anyks::ASCb::info() const noexcept {
 			// Если название словаря передано, устанавливаем
 			if(!name.empty()) info.append(this->alphabet->format("* Dictionary name: %s\r\n\r\n", name.c_str()));
 			// Если локаль передана, устанавливаем
-			if(!localeDict.empty()) info.append(this->alphabet->format("* Locale: %s\r\n", localeDict.c_str()));
+			if(!encrypted && !localeDict.empty()) info.append(this->alphabet->format("* Locale: %s\r\n", localeDict.c_str()));
 			// Если алфавит передан, устанавливаем
-			if(!alphabetDict.empty()) info.append(this->alphabet->format("* Alphabet: %s\r\n\r\n", alphabetDict.c_str()));
+			if(!encrypted && !alphabetDict.empty()) info.append(this->alphabet->format("* Alphabet: %s\r\n\r\n", alphabetDict.c_str()));
 			// Если локаль передана, устанавливаем разделитель
 			else if(!localeDict.empty()) info.append("\r\n");
 			// Если дата генерации словаря получена
@@ -1219,7 +1219,7 @@ void anyks::ASCb::info() const noexcept {
 			// Если апостроф не разрешён
 			else info.append("* Allow apostrophe: NO\r\n\r\n");
 			// Если неизвестное слово есть, устанавливаем
-			if(!unknownAlm.empty()) info.append(this->alphabet->format("* Unknown word: %s\r\n\r\n", unknownAlm.c_str()));
+			if(!encrypted && !unknownAlm.empty()) info.append(this->alphabet->format("* Unknown word: %s\r\n\r\n", unknownAlm.c_str()));
 			// Если количество слов во всех документах получены, устанавливаем
 			if(cw > 0) info.append(this->alphabet->format("* Count words: %zu\r\n", cw));
 			// Если количество документов в словаре получено, устанавливаем

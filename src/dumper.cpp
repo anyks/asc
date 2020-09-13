@@ -1649,8 +1649,10 @@ const pair <size_t, size_t> anyks::Dumper::smart(const awrd_t & word, const size
  * @return        размер полученной последовательности
  */
 const pair <size_t, size_t> anyks::Dumper::set(const awrd_t & word, const size_t ids, const size_t size, const bool replace) noexcept {
+	// Получаем идентификатор слова по-умолчанию
+	const size_t nidw = idw_t::NIDW;
 	// Результат работы функции
-	pair <size_t, size_t> result = make_pair(idw_t::NIDW, 0);
+	pair <size_t, size_t> result = make_pair(nidw, 0);
 	// Если объект токенизатора существует
 	if(this->tokenizer != nullptr){
 		// Запоминаем идентификатор последовательности
