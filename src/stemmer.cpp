@@ -257,7 +257,7 @@ anyks::Stemmer::~Stemmer() noexcept {
 #ifndef NOPYTHON
 	// Если объект создан, удаляем его
 	if(this->script != nullptr) delete this->script;
-#elif
+#else
 	/**
 	 * Так и не понял этот баг
 	 * Деструктор отрабатывает но из-за установленной функции lemmaFn поток блокируется намертво
