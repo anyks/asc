@@ -2,49 +2,49 @@
 
 # ANYKS Spell-checker (ASC) C++11
 
-- [Описание проекта](https://github.com/anyks/asc#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
-- [Список возможностей](https://github.com/anyks/asc#%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%B2%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9)
-- [Зависимости](https://github.com/anyks/asc#%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8)
-- [Сборка проекта](https://github.com/anyks/asc#%D1%81%D0%B1%D0%BE%D1%80%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
-    - [Клонирование проекта](https://github.com/anyks/asc#%D0%BA%D0%BB%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0)
-    - [Linux и FreeBSD](https://github.com/anyks/asc#linux-%D0%B8-freebsd)
+- [Project description](https://github.com/anyks/asc#project-description)
+- [List of features](https://github.com/anyks/asc#list-of-features)
+- [Dependencies](https://github.com/anyks/asc#dependencies)
+- [Building the project](https://github.com/anyks/asc#building-the-project)
+    - [Cloning the project](https://github.com/anyks/asc#cloning-the-project)
+    - [Linux and FreeBSD](https://github.com/anyks/asc#linux-and-freebsd)
     - [MacOS X](https://github.com/anyks/asc#macos-x)
-- [Готовые словари](https://github.com/anyks/asc#%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D1%8B%D0%B5-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B8)
-- [Тестирование](https://github.com/anyks/asc#%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
-    - [Материалы использовавшиеся в тестировании](https://github.com/anyks/asc#%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%B2%D1%88%D0%B8%D0%B5%D1%81%D1%8F-%D0%B2-%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8)
-- [Форматы файлов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D1%8B-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2)
+- [Ready-to-use dictionaries](https://github.com/anyks/asc#ready-to-use-dictionaries)
+- [Testing](https://github.com/anyks/asc#testing)
+    - [Files used for testing](https://github.com/anyks/asc#files-used-for-testing)
+- [File formats](https://github.com/anyks/asc#file-formats)
     - [Arpa](https://github.com/anyks/asc#arpa)
     - [Vocab](https://github.com/anyks/asc#vocab)
-        - [Описание](https://github.com/anyks/asc#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5)
-    - [Файл похожих букв в разных словарях](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D0%BF%D0%BE%D1%85%D0%BE%D0%B6%D0%B8%D1%85-%D0%B1%D1%83%D0%BA%D0%B2-%D0%B2-%D1%80%D0%B0%D0%B7%D0%BD%D1%8B%D1%85-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8F%D1%85)
-    - [Файл списка аббревиатур](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B0%D0%B1%D0%B1%D1%80%D0%B5%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80)
-    - [Файл списка доменных зон](https://github.com/anyks/asc#%D1%84%D0%B0%D0%B9%D0%BB-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%B7%D0%BE%D0%BD)
-    - [Формат скрипта python предобработки полученных слов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D0%BF%D1%80%D0%B5%D0%B4%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D0%BB%D0%BE%D0%B2)
-    - [Формат скрипта python определения собственных токенов слов](https://github.com/anyks/asc#%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D1%81%D0%BE%D0%B1%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%BE%D0%B2-%D1%81%D0%BB%D0%BE%D0%B2)
-    - [Пример скрипта python стемминга](https://github.com/anyks/asc#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%B0-python-%D1%81%D1%82%D0%B5%D0%BC%D0%BC%D0%B8%D0%BD%D0%B3%D0%B0)
-    - [Переменные окружения](https://github.com/anyks/asc#%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5-%D0%BE%D0%BA%D1%80%D1%83%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F)
-- [Примеры](https://github.com/anyks/asc#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B)
-    - [Информация о бинарном словаре](https://github.com/anyks/asc#%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F-%D0%BE-%D0%B1%D0%B8%D0%BD%D0%B0%D1%80%D0%BD%D0%BE%D0%BC-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D0%B5)
-    - [Обучение](https://github.com/anyks/asc#%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)
-    - [Исправление ошибок](https://github.com/anyks/asc#%D0%B8%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA)
-- [Лицензия](https://github.com/anyks/asc/blob/master/site#%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F)
-- [Контакты](https://github.com/anyks/asc/blob/master/site#%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B)
+        - [Description](https://github.com/anyks/asc#description)
+    - [File containing similar letters encountered in different dictionaries](https://github.com/anyks/asc#file-containing-similar-letters-encountered-in-different-dictionaries)
+    - [File containing a list of abbreviations](https://github.com/anyks/asc#file-containing-a-list-of-abbreviations)
+    - [File containing a list of domain zones](https://github.com/anyks/asc#file-containing-a-list-of-domain-zones)
+    - [Python word preprocessing script template](https://github.com/anyks/asc#python-word-preprocessing-script-template)
+    - [Python custom word token definition script template](https://github.com/anyks/asc#python-custom-word-token-definition-script-template)
+    - [Python stemming script example](https://github.com/anyks/asc#python-stemming-script-example)
+    - [Environment variables](https://github.com/anyks/asc#environment-variables)
+- [Examples](https://github.com/anyks/asc#examples)
+    - [Information about the binary dictionary](https://github.com/anyks/asc#information-about-the-binary-dictionary)
+    - [Training process](https://github.com/anyks/asc#training-process)
+    - [Error correction](https://github.com/anyks/asc#error-correction)
+- [License](https://github.com/anyks/asc/blob/master/site#license)
+- [Contact info](https://github.com/anyks/asc/blob/master/site#contact-info)
 
-## Описание проекта
+## Project description
 
-Систем для исправления ошибок и опечаток в тексте, существует большое количество. У каждой такой системы есть свои плюсы и минусы, каждая система имеет право на жизнь и найдет своего пользователя. Я хочу представить, ещё одну версию системы исправления опечаток, то - как я вижу такую систему и какой она должна быть.
+There are a lot of typo and text error correction systems out there. Each one of those systems has its pros and cons, and each system has the right to live and will find its own user base. I would like to present my own version of the typo correction system with its own unique features.
 
-## Список возможностей
+## List of features
 
-- Исправление ошибок в словах с разницей до 4-х дистанций по **Левенштейну**.
-- Исправление опечаток в словах (вставка, удаление, замещение, перестановка) символов.
-- **Ё**фикация с учётом контекста.
-- Простановка регистра первой буквы слова, для (имён собственных и названий) с учётом контекста.
-- Разбиение объединённых слов на отдельные слова, с учётом контекста.
-- Выполнение анализа текста без корректировки исходного текста.
-- Поиск в тексте наличия (ошибок, опечаток, неверного контекста).
+- Correction of mistakes in words with a **Levenshtein distance** of up to 4;
+- Correction of different types of typos in words: insertion, deletion, substitution, rearrangement of character;
+- **Ё**-fication of a word given the context (letter 'ё' is commonly replaced by letter 'е' in russian typed text);
+- Context-based word capitalization for proper names and titles;
+- Context-based splitting for words that are missing the separating space character;
+- Text analysis without correcting the original text;
+- Searching the text for errors, typos, incorrect context.
 
-## Зависимости
+## Dependencies
 
 - [Zlib](http://www.zlib.net)
 - [Bloom](http://www.partow.net/programming/bloomfilter/index.html)
@@ -57,15 +57,23 @@
 - [BigInteger](http://mattmccutchen.net/bigint)
 - [ALM](https://github.com/anyks/alm)
 
-## Сборка проекта
+## Building the project
 
-### Клонирование проекта
+### Python version ASC
+```bash
+$ python3 -m pip install pybind11
+$ python3 -m pip install anyks-sc
+```
+
+[Documentation pip](https://pypi.org/project/anyks-sc)
+
+### Cloning the project
 
 ```bash
 $ git clone --recursive https://github.com/anyks/asc.git
 ```
 
-### Linux и FreeBSD
+### Linux and FreeBSD
 
 ```bash
 $ mkdir ./build
@@ -85,36 +93,37 @@ $ cmake -DOPENSSL_ROOT_DIR=/usr/local/Cellar/openssl@1.1/1.1.1g -DOPENSSL_LIBRAR
 $ make
 ```
 
-## Готовые словари
+## Ready-to-use dictionaries
 
-| Название                                                               | Размер (Гб) | Оперативная память (Гб) | Размер N-грамм | Язык  |
-|------------------------------------------------------------------------|-------------|-------------------------|----------------|-------|
-| [wittenbell-3-big.asc](https://cloud.mail.ru/public/2b9E/sz9b8YGJ1)    | 1.97        | 15.6                    | 3              | RU    |
-| [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz) | 1.24        | 9.7                     | 3              | RU    |
-| [mkneserney-3-middle.asc](https://cloud.mail.ru/public/3SBP/35WJFKFyd) | 1.33        | 9.7                     | 3              | RU    |
-| [wittenbell-3-single.asc](https://cloud.mail.ru/public/21jt/YEW493XQa) | 0.772       | 5.14                    | 3              | RU    |
-| [wittenbell-5-single.asc](https://cloud.mail.ru/public/5Adc/5x5Ea1eA6) | 1.37        | 10.7                    | 5              | RU    |
+| Dictionary name                                                        | Size (GB)   | RAM (GB)                | N-gram order   | Language |
+|------------------------------------------------------------------------|-------------|-------------------------|----------------|----------|
+| [wittenbell-3-big.asc](https://cloud.mail.ru/public/2b9E/sz9b8YGJ1)    | 1.97        | 15.6                    | 3              | RU       |
+| [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz) | 1.24        | 9.7                     | 3              | RU       |
+| [mkneserney-3-middle.asc](https://cloud.mail.ru/public/3SBP/35WJFKFyd) | 1.33        | 9.7                     | 3              | RU       |
+| [wittenbell-3-single.asc](https://cloud.mail.ru/public/21jt/YEW493XQa) | 0.772       | 5.14                    | 3              | RU       |
+| [wittenbell-5-single.asc](https://cloud.mail.ru/public/5Adc/5x5Ea1eA6) | 1.37        | 10.7                    | 5              | RU       |
 
-## Тестирование
+## Testing
 
-Для проверки работы системы, использовались данные соревнования [«исправления опечаток» 2016 года от Dialog21](http://www.dialog-21.ru/evaluation/2016/spelling_correction).
-Для тестирования использовался обученный бинарный словарь: [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz)
+To test the system, we used data from the [2016 "spelling correction" competition organized by Dialog21](http://www.dialog-21.ru/evaluation/2016/spelling_correction).<br>
+The trained binary dictionary that was used for testing: [wittenbell-3-middle.asc](https://cloud.mail.ru/public/5zo5/2F6uav8fz)
 
-| №                              | Precision | Recall | FMeasure |
-|--------------------------------|-----------|--------|----------|
-| **Режим исправления опечаток** | 76.97     | 62.71  | 69.11    |
-| **Режим исправления ошибок**   | 73.72     | 60.53  | 66.48    |
+| Mode                              | Precision | Recall | FMeasure |
+|-----------------------------------|-----------|--------|----------|
+| **Typo correction**               | 76.97     | 62.71  | 69.11    |
+| **Error correction**              | 73.72     | 60.53  | 66.48    |
 
-Думаю, излишне добавлять другие данные, при желании каждый может повторить тест, все используемые материалы в тестировании прикладываю ниже.
+I think it is unnecessary to add any other data. Anyone can repeat the test if they wish (all files used for testing are attached below).
 
-### Материалы использовавшиеся в тестировании
-- [test.txt](https://cloud.mail.ru/public/3rzx/2HwqDU9j5) - Текст для тестирования
-- [correct.txt](https://cloud.mail.ru/public/3dAN/J4EzV4U3W) - Текст корректных вариантов
-- [evaluate.py](https://cloud.mail.ru/public/ZTRf/4sUS1Sc2p) - Скрипт Python3 для расчёта результатов коррекции
+### Files used for testing
+
+- [test.txt](https://cloud.mail.ru/public/3rzx/2HwqDU9j5) - Text used for testing;
+- [correct.txt](https://cloud.mail.ru/public/3dAN/J4EzV4U3W) - File with correct text;
+- [evaluate.py](https://cloud.mail.ru/public/ZTRf/4sUS1Sc2p) - Python3 script for correction result evaluation.
 
 ---
 
-## Форматы файлов
+## File formats
 
 ### Arpa
 ```
@@ -156,7 +165,7 @@ ngram 3=15
 \end\
 ```
 
-| N-грамма              | Встречаемость в корпусе      | Встречаемость в документах |
+| N-gramm               | Occurance in the corpus      | Occurrence in documents    |
 |-----------------------|------------------------------|----------------------------|
 | только в одном        | 2                            | 1                          |
 
@@ -199,22 +208,22 @@ unq=9390
 ...
 ```
 
-| Идентификатор слова   | Слово     | Встречаемость в корпусе    | Встречаемость в документах | tf       | tf-idf   | wltf      |
+| Word ID               | Word      | Occurance in the corpus    | Occurance in documents     | tf       | tf-idf   | wltf      |
 |-----------------------|-----------|----------------------------|----------------------------|----------|----------|-----------|
 | 2282345502            | новый     | 10                         | 1                          | 0.000420 | 0.000000 | -6.776199 |
 
-#### Описание:
+#### Description:
 
-- **ad** - Общее количество документов в обучающем корпусе
-- **cw** - Общее количество слов в обучающем корпусе
-- **oc** - Встречаемость в корпусе
-- **dc** - Встречаемость в документах
-- **tf** - (term frequency — частота слова) — отношение числа вхождений некоторого слова к общему числу слов документа. Таким образом, оценивается важность слова в пределах отдельного документа, расчитывается как: [tf = oc / cw]
-- **idf** - (inverse document frequency — обратная частота документа) — инверсия частоты, с которой некоторое слово встречается в документах коллекции, расчитывается как: [idf = log(ad / dc)]
-- **tf-idf** - Расчитывается как: [tf-idf = tf * idf]
-- **wltf** - Рейтинг слова, расчитывается как: [wltf = 1 + log(tf * dc)]
+- **ad** - The total number of documents in the training corpus;
+- **cw** - The total number of words in the training corpus;
+- **oc** - Occurance in the corpus;
+- **dc** - Occurance in documents;
+- **tf** - (term frequency) — the ratio of the number of occurrences of a certain word to the total number of words in the document. Thus, the importance of a word within a separate document is estimated, calculated as: [tf = oc / cw];
+- **idf** - (inverse document frequency) — the inversion of the frequency with which a word occurs in the collection of documents, calculated as: [idf = log(ad / dc)]
+- **tf-idf** - calculated as: [tf-idf = tf * idf]
+- **wltf** - Word rating, calculated as: [wltf = 1 + log(tf * dc)]
 
-### Файл похожих букв в разных словарях
+### File containing similar letters encountered in different dictionaries
 ```
 p  р
 c  с
@@ -230,11 +239,11 @@ m  м
 ...
 ```
 
-| Искомая буква | Разделитель | Буква на замену   |
-|---------------|-------------|-------------------|
-| t             | \t          | т                 |
+| Original letter | Separator   | Replacement letter   |
+|-----------------|-------------|----------------------|
+| t               | \t          | т                    |
 
-### Файл списка аббревиатур
+### File containing a list of abbreviations
 ```
 г
 р
@@ -246,9 +255,9 @@ m  м
 ...
 ```
 
-> Все слова из данного списка будут идентифицированны как неизвестное слово **〈abbr〉**.
+> All words from this list will be marked as an unknown word **〈abbr〉**.
 
-### Файл списка доменных зон
+### ile containing a list of domain zones
 ```
 ru
 su
@@ -260,42 +269,42 @@ info
 ...
 ```
 
-> Для более точного идентифицирования токена **〈url〉**, следует добавить свои доменные зоны (все доменные зоны в примере, уже предустановлены).
+> For a more accurate definition of the ** 〈url〉 ** token, we recommend adding your own domain zones (all domain zones in the example are already pre-installed).
 
 ---
 
-### Формат скрипта python предобработки полученных слов
+### Python word preprocessing script template
 ```python
 # -*- coding: utf-8 -*-
 
 def init():
     """
-    Метод инициализации: выполняется только один раз при запуске приложения
+    Initialization Method: Executed once at application startup
     """
 
 def run(word, context):
     """
-    Метод запуска обработки: запускается при извлечении слова из текста
-    @word    обрабатываемое слово
-    @context последовательность предыдущих слов в виде массива
+    Processing method: called during word extraction from text
+    @word    proccesed word
+    @context sequence of previous words in form of an array
     """
     return word
 ```
 
-### Формат скрипта python определения собственных токенов слов
+### Python custom word token definition script template
 ```python
 # -*- coding: utf-8 -*-
 
 def init():
     """
-    Метод инициализации: выполняется только один раз при запуске приложения
+    Initialization Method: Executed once at application startup
     """
 
 def run(token, word):
     """
-    Метод запуска обработки: запускается при извлечении слова из текста
-    @token название токена слова
-    @word  обрабатываемое слово
+    Processing method: called during word extraction from text
+    @token word token name
+    @word processed word
     """
     if token and (token == "<usa>"):
         if word and (word.lower() == "сша"): return "ok"
@@ -304,85 +313,85 @@ def run(token, word):
     return "no"
 ```
 
-### Пример скрипта python стемминга
+### Python stemming script example
 ```python
 import spacy
 import pymorphy2
 
-# Морфологический анализатор
+# Morphological analyzer
 morphRu = None
 morphEn = None
 
 def init():
     """
-    Метод инициализации: выполняется только один раз при запуске приложения
+    Initialization Method: Executed once at application startup
     """
-    # Получаем морфологический разбор
+    # Get morphological analyzer
     global morphRu
     global morphEn
-    # Активируем морфологический разбор для русского языка
+    # Activate morphological analyzer for Russian language
     morphRu = pymorphy2.MorphAnalyzer()
-    # Активируем морфологический разбор для английского языка
+    # Activate morphological analyzer for English language
     morphEn = spacy.load('en', disable=['parser', 'ner'])
 
 def eng(word):
     """
-    Метод лемматизации английского языка
-    @word слово для получения леммы
+    English lemmatization method
+    @word word to lemmatize
     """
-    # Получаем морфологический разбор
+    # Get morphological analyzer
     global morphEn
-    # Получаем результат
+    # Get morphological analyzer result
     words = morphEn(word)
-    # Получаем результат
+    # Get lemmatization result
     word = ''.join([token.lemma_ for token in words]).strip()
-    # Если слово получено верное
+    # If the resulting word is a correct word
     if word[0] != '-' and word[len(word) - 1] != '-':
-        # Выводим результат
+        # Return result
         return word
     else:
-        # Выводим пустоту
+        # Return empty string
         return ""
 
 def rus(word):
     """
-    Метод лемматизации русского языка
-    @word слово для получения леммы
+    Russian lemmatization method
+    @word word to lemmatize
     """
-    # Получаем морфологический разбор
+    # Get morphological analyzer
     global morphRu
-    # Если морфологический разбор активирован
+    # If morphological analyzer exists
     if morphRu != None:
-        # Извлекаем результат
+        # Get morphological analyzer result
         word = morphRu.parse(word)[0].normal_form
-        # Выводим результат
+        # Return analyzer result
         return word
     else:
-        # Выводим пустоту
+        # Return empty string
         return ""
 
 def run(word, lang):
     """
-    Метод запуска морфологического разбора
-    @word слово для получения леммы
-    @lang язык алфавита передаваемого слова
+    Method that runs morphological processing
+    @word word to lemmatize
+    @lang alphabet name for @word
     """
-    # Если это русский язык
+    # If the word is in Russian
     if lang == "ru":
-        # Выводим лемму для русского языка
+        # Return russian lemmatization result
         return rus(word.lower())
-    # Если это английский язык
+    # If the word is in English
     elif lang == "en":
-        # Выводим лемму для английского языка
+        # Return english lemmatization result
         return eng(word.lower())
 ```
 
 ---
 
-### Переменные окружения
+### Environment variables
 
-- Все параметры можно передавать через переменные окружения. Переменные начинаются с префикса **ASC_** и должны записываться в верхнем регистре, в остальном названия их соответствуют параметрам приложения.
-- Если одновременно указаны и параметры приложения и переменные окружения, приоритет будут иметь параметры приложения.
+- All arguments can be passed via environment variables. Variables start with the ** ASC _ ** prefix and must be written in uppercase,  other than that, all the variable names correspond to their application arguments.
+- If both application parameters and environment variables were passed, application parameters will have priority.
 
 ```bash
 $ export ASC_R-ARPA=./lm.arpa
@@ -390,7 +399,7 @@ $ export ASC_R-ARPA=./lm.arpa
 $ export ASC_R-BIN=./wittenbell-3-single.asc
 ```
 
-- Пример параметров в JSON формате
+- Example of parameters in JSON format
 
 ```json
 {
@@ -412,18 +421,18 @@ $ export ASC_R-BIN=./wittenbell-3-single.asc
 
 ---
 
-## Примеры
+## Examples
 
-![Пример работы программы](https://raw.githubusercontent.com/anyks/asc/master/site/img/screen1.png "Пример работы программы")
+![Example of running the program](https://raw.githubusercontent.com/anyks/asc/master/site/img/screen1.png "Example of running the program")
 
-### Информация о бинарном словаре
+### Information about the binary dictionary
 ```bash
 $ ./asc -method info -r-bin ./dict/wittenbell-3-middle.asc
 ```
 
 ---
 
-### Обучение
+### Training process
 ```json
 {
   "ext": "txt",
@@ -489,24 +498,24 @@ $ ./asc -r-json ./train.json
 ```
 ---
 
-### Исправление ошибок
+### Error correction
 
-**Чтение из файла текста -> исправление -> запись в новый файл исправленный текст**
+**Reading text from file -> correction -> writing corrected text to a new file**
 ```bash
 $ ./asc -debug 1 -method spell -spell-verbose -asc-split -asc-alter -asc-esplit -asc-rsplit -asc-uppers -asc-hyphen -asc-wordrep -r-text ./texts/input.txt -w-text ./texts/output.txt -r-bin ./dict/wittenbell-3-middle.asc
 ```
 
-**Чтение из потока -> исправление -> вывод в поток**
+**Reading from stream -> correction -> output to stream**
 ```bash
 $ echo "слзы теут на мрозе" | ./asc -debug 1 -method spell -spell-verbose -asc-split -asc-alter -asc-esplit -asc-rsplit -asc-uppers -asc-hyphen -asc-wordrep -r-bin ./dict/wittenbell-3-middle.asc
 ```
 
-**Работа в интерактивном режиме**
+**Running in the interactive mode**
 ```bash
 $ ./asc -debug 1 -method spell -spell-verbose -asc-split -asc-alter -asc-esplit -asc-rsplit -asc-uppers -asc-hyphen -asc-wordrep -interactive -r-bin ./dict/wittenbell-3-middle.asc
 ```
 
-**Тоже работа с файлами, но через шаблон в формате JSON**
+**Working with files using JSON template**
 ```json
 {
   "debug": 1,
@@ -531,26 +540,26 @@ $ ./asc -r-json ./spell.json
 
 * * *
 
-## Лицензия
+## License
 
 ![MIT License](http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png "MIT License")
 
-Приложение лицензируется под [MIT License](http://opensource.org/licenses/MIT):
+The class is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
-Авторские права © 2020 [Лобарев Юрий](https://anyks.com)
+Copyright © 2020 [Yuriy Lobarev](https://anyks.com)
 
-Данная лицензия разрешает лицам, получившим копию данного программного обеспечения и сопутствующей документации (в дальнейшем именуемыми «Программное Обеспечение»), безвозмездно использовать Программное Обеспечение без ограничений, включая неограниченное право на использование, копирование, изменение, слияние, публикацию, распространение, сублицензирование и/или продажу копий Программного Обеспечения, а также лицам, которым предоставляется данное Программное Обеспечение, при соблюдении следующих условий:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-Указанное выше уведомление об авторском праве и данные условия должны быть включены во все копии или значимые части данного Программного Обеспечения.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-ДАННОЕ ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ ПРЕДОСТАВЛЯЕТСЯ «КАК ЕСТЬ», БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, ЯВНО ВЫРАЖЕННЫХ ИЛИ ПОДРАЗУМЕВАЕМЫХ, ВКЛЮЧАЯ ГАРАНТИИ ТОВАРНОЙ ПРИГОДНОСТИ, СООТВЕТСТВИЯ ПО ЕГО КОНКРЕТНОМУ НАЗНАЧЕНИЮ И ОТСУТСТВИЯ НАРУШЕНИЙ, НО НЕ ОГРАНИЧИВАЯСЬ ИМИ. НИ В КАКОМ СЛУЧАЕ АВТОРЫ ИЛИ ПРАВООБЛАДАТЕЛИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ПО КАКИМ-ЛИБО ИСКАМ, ЗА УЩЕРБ ИЛИ ПО ИНЫМ ТРЕБОВАНИЯМ, В ТОМ ЧИСЛЕ, ПРИ ДЕЙСТВИИ КОНТРАКТА, ДЕЛИКТЕ ИЛИ ИНОЙ СИТУАЦИИ, ВОЗНИКШИМ ИЗ-ЗА ИСПОЛЬЗОВАНИЯ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ ИЛИ ИНЫХ ДЕЙСТВИЙ С ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 * * *
 
-## Контакты
+## Contact
 
-Если у вас есть вопросы относительно приложения, я бы хотел пригласить вас [на GitHub](https://github.com/anyks/asc/issues/new/choose). Пожалуйста, опишите ваш запрос, проблему или вопрос как можно более подробно, а также укажите версию библиотеки, которую вы используете, а также версию вашего компилятора и операционной системы. Открытие проблемы на GitHub позволяет другим пользователям и участникам этой библиотеки сотрудничать.
+If you have questions regarding the library, I would like to invite you to [open an issue at GitHub](https://github.com/anyks/asc/issues/new/choose). Please describe your request, problem, or question as detailed as possible, and also mention the version of the library you are using as well as the version of your compiler and operating system. Opening an issue at GitHub allows other users and contributors to this library to collaborate.
 
 ---
 
-[Лобарев Юрий](https://anyks.com) <forman@anyks.com>
+[Yuriy Lobarev](https://anyks.com) <forman@anyks.com>
