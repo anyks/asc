@@ -6,6 +6,7 @@
 - [List of features](https://github.com/anyks/asc#list-of-features)
 - [Dependencies](https://github.com/anyks/asc#dependencies)
 - [Building the project](https://github.com/anyks/asc#building-the-project)
+    - [Python version ASC](https://github.com/anyks/asc#python-version-asc)
     - [Cloning the project](https://github.com/anyks/asc#cloning-the-project)
     - [Linux and FreeBSD](https://github.com/anyks/asc#linux-and-freebsd)
     - [MacOS X](https://github.com/anyks/asc#macos-x)
