@@ -556,7 +556,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 * * *
 
-## Contact
+## Contact Info
 
 If you have questions regarding the library, I would like to invite you to [open an issue at GitHub](https://github.com/anyks/asc/issues/new/choose). Please describe your request, problem, or question as detailed as possible, and also mention the version of the library you are using as well as the version of your compiler and operating system. Opening an issue at GitHub allows other users and contributors to this library to collaborate.
 
