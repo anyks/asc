@@ -560,7 +560,7 @@ void anyks::Dict::setDate(const time_t date) noexcept {
  */
 void anyks::Dict::setCode(const wstring & code) noexcept {
 	// Если код языка передан
-	if(!code.empty()) this->params.code = code;
+	if(!code.empty()) this->params.code = this->alphabet->toLower(code);
 }
 /**
  * setName Метод установки названия словаря
@@ -848,7 +848,7 @@ const pair <size_t, size_t> anyks::Dict::find(const word_t & word, dumper_t & dm
 	// Если список слов не пустой
 	if(!this->words.empty() && (word.length() <= MAX_WORD_LENGTH)){
 		// Объект левенштейна
-		lev_t levenshtein;
+		lev_t algorithms;
 		// Создаём гипотезу
 		dumper_t::awrd_t hypothesis;
 		// Устанавливаем эталонную фразу
@@ -869,13 +869,13 @@ const pair <size_t, size_t> anyks::Dict::find(const word_t & word, dumper_t & dm
 				// Устанавливаем идентификатор гипотезы
 				hypothesis.idw = idw;
 				// Получаем дистанцию
-				hypothesis.lev = (errors > 1 ? levenshtein.distance(word, it->second) : levenshtein.damerau(word, it->second));
+				hypothesis.lev = (errors > 1 ? algorithms.distance(word, it->second) : algorithms.damerau(word, it->second));
 				// Отфильтровываем ненужные нам слова
 				if(!it->second.empty() && (hypothesis.lev <= errors)){
 					// Извлекаем слово из списка
 					hypothesis.word = it->second;
 					// Устанавливаем значение Танимото
-					hypothesis.tmo = levenshtein.tanimoto(word, hypothesis.word);
+					hypothesis.tmo = algorithms.tanimoto(word, hypothesis.word);
 					// Если расстояние Левенштейна слишком большое, тогда Танимото должен быть больше 4.0
 					if((hypothesis.lev <= 3) || (hypothesis.tmo >= 0.4)){
 						// Если вывод отладочной информации разрешён

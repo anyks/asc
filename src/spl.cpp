@@ -712,7 +712,7 @@ void anyks::ASpell::spell(wstring & text, const u_short options, vector <vector 
 	// Если текст передан
 	if(!text.empty() && (this->dict != nullptr) && (this->alm != nullptr) && (this->alphabet != nullptr) && (this->tokenizer != nullptr)){
 		// Объект левенштейна
-		lev_t levenshtein;
+		lev_t algorithms;
 		// Предыдущее слово
 		word_t lastWord = L"";
 		// Позиция добавления слов
@@ -867,9 +867,9 @@ void anyks::ASpell::spell(wstring & text, const u_short options, vector <vector 
 						// Устанавливаем полученное слово
 						hypothesis.word = (* this->dict->word(bwrd.first));
 						// Выполняем расчёт дистанции Дамерау-Левенштейна
-						hypothesis.lev = levenshtein.damerau(bwrd.second.first, bwrd.second.second);
+						hypothesis.lev = algorithms.damerau(bwrd.second.first, bwrd.second.second);
 						// Выполняем расчёт значения Танимото
-						hypothesis.tmo = levenshtein.tanimoto(bwrd.second.first, bwrd.second.second);
+						hypothesis.tmo = algorithms.tanimoto(bwrd.second.first, bwrd.second.second);
 						// Добавляем гипотезу в сборщик гипотез
 						dmp.once(hypothesis, parts.size(), pos2);
 					}
@@ -922,7 +922,7 @@ void anyks::ASpell::spell(wstring & text, const u_short options, vector <vector 
 								hypotheses.at(i) = hypothesis;
 							}
 							// Добавляем список гипотез в список
-							pos1 = dmp.add(hypotheses, levenshtein.damerau(word, text), levenshtein.tanimoto(word, text), pos1);
+							pos1 = dmp.add(hypotheses, algorithms.damerau(word, text), algorithms.tanimoto(word, text), pos1);
 						}
 					}
 					// Если разрешено выполнять сплиты
@@ -969,7 +969,7 @@ void anyks::ASpell::spell(wstring & text, const u_short options, vector <vector 
 								hypotheses.at(i) = hypothesis;
 							}
 							// Добавляем список гипотез в список
-							pos1 = dmp.add(hypotheses, levenshtein.damerau(word, text), levenshtein.tanimoto(word, text), pos1);
+							pos1 = dmp.add(hypotheses, algorithms.damerau(word, text), algorithms.tanimoto(word, text), pos1);
 						}
 					}
 					// Если сплит выполнять не удалось
@@ -1050,7 +1050,7 @@ void anyks::ASpell::analyze(const wstring & text, const u_short options, vector 
 		// Очищаем список анализируемых слов
 		info.clear();
 		// Объект левенштейна
-		lev_t levenshtein;
+		lev_t algorithms;
 		// Предыдущее слово
 		word_t lastWord = L"";
 		// Позиция добавления слов
@@ -1216,9 +1216,9 @@ void anyks::ASpell::analyze(const wstring & text, const u_short options, vector 
 						// Устанавливаем полученное слово
 						hypothesis.word = (* this->dict->word(bwrd.first));
 						// Выполняем расчёт дистанции Дамерау-Левенштейна
-						hypothesis.lev = levenshtein.damerau(bwrd.second.first, bwrd.second.second);
+						hypothesis.lev = algorithms.damerau(bwrd.second.first, bwrd.second.second);
 						// Выполняем расчёт значения Танимото
-						hypothesis.tmo = levenshtein.tanimoto(bwrd.second.first, bwrd.second.second);
+						hypothesis.tmo = algorithms.tanimoto(bwrd.second.first, bwrd.second.second);
 						// Добавляем гипотезу в сборщик гипотез
 						dmp.once(hypothesis, parts.size(), pos2);
 					}
@@ -1271,7 +1271,7 @@ void anyks::ASpell::analyze(const wstring & text, const u_short options, vector 
 								hypotheses.at(i) = hypothesis;
 							}
 							// Добавляем список гипотез в список
-							pos1 = dmp.add(hypotheses, levenshtein.damerau(word, text), levenshtein.tanimoto(word, text), pos1);
+							pos1 = dmp.add(hypotheses, algorithms.damerau(word, text), algorithms.tanimoto(word, text), pos1);
 						}
 					}
 					// Если разрешено выполнять сплиты
@@ -1318,7 +1318,7 @@ void anyks::ASpell::analyze(const wstring & text, const u_short options, vector 
 								hypotheses.at(i) = hypothesis;
 							}
 							// Добавляем список гипотез в список
-							pos1 = dmp.add(hypotheses, levenshtein.damerau(word, text), levenshtein.tanimoto(word, text), pos1);
+							pos1 = dmp.add(hypotheses, algorithms.damerau(word, text), algorithms.tanimoto(word, text), pos1);
 						}
 					}
 					// Если сплит выполнять не удалось
