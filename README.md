@@ -27,8 +27,8 @@
     - [Information about the binary dictionary](https://github.com/anyks/asc#information-about-the-binary-dictionary)
     - [Training process](https://github.com/anyks/asc#training-process)
     - [Error correction](https://github.com/anyks/asc#error-correction)
-- [License](https://github.com/anyks/asc/blob/master/site#license)
-- [Contact info](https://github.com/anyks/asc/blob/master/site#contact-info)
+- [License](https://github.com/anyks/asc#license)
+- [Contact info](https://github.com/anyks/asc#contact-info)
 
 ## Project description
 
@@ -257,7 +257,7 @@ m  м
 
 > All words from this list will be marked as an unknown word **〈abbr〉**.
 
-### ile containing a list of domain zones
+### File containing a list of domain zones
 ```
 ru
 su
