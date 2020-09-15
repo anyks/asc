@@ -45,6 +45,32 @@ void anyks::ASCb::read() noexcept {
 				// Устанавливаем размер шифрования
 				this->aspl->setAES(this->aes);
 			}{
+				// Запоминаем, что словарь зашифрован
+				this->aspl->get("encrypted", encrypted);
+				// Если словарь зашифрован
+				if(encrypted){
+					// Если пароль существует
+					if(!this->password.empty()){
+						// Пароль сохраненный в словаре
+						string password = "";
+						// Считываем сохраненный пароль
+						this->aspl->get("password", password, encrypted);
+						// Если пароль не получен
+						if(password.empty() || (this->password.compare(password) != 0)){
+							// Выводим сообщение об ошибке
+							this->alphabet->log("password '%s' is wrong\r\n", alphabet_t::log_t::error, this->logfile, this->password.c_str());
+							// Выходим из приложения
+							exit(EXIT_FAILURE);
+						}
+					// Если пароль не передан, выводим сообщение и выходим
+					} else {
+						// Выводим сообщение об ошибке
+						this->alphabet->log("%s\r\n", alphabet_t::log_t::error, this->logfile, "password is empty");
+						// Выходим из приложения
+						exit(EXIT_FAILURE);
+					}
+				}
+			}{
 				// Дата генерации словаря
 				time_t date = 0;
 				// Количество слов во всех документах и количество всех документов в словаре
@@ -77,8 +103,6 @@ void anyks::ASCb::read() noexcept {
 				this->aspl->get("contacts", contacts);
 				// Запоминаем количество записанных буферов
 				this->aspl->get("countAlm", countAlm);
-				// Запоминаем, что словарь зашифрован
-				this->aspl->get("encrypted", encrypted);
 				// Запоминаем список пилотных слов
 				this->aspl->getValues("pilots", pilots);
 				// Запоминаем список слов, которые всегда начинаются с заглавной буквы
@@ -615,6 +639,8 @@ void anyks::ASCb::write() const noexcept {
 			this->aspl->setAES(this->aes);
 			// Запоминаем размер шифрования
 			this->aspl->set("aes", this->aes);
+			// Сохраняем пароль в словарь, в зашифрованном виде
+			this->aspl->set("password", this->password, true);
 		}{
 			// Запоминаем тип ALM
 			this->aspl->set("almtype", this->ALMv2);

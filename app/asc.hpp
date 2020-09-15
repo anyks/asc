@@ -9,9 +9,9 @@
 // Название языковой модели
 #define ANYKS_ASC_NAME "asc"
 // Версия приложения
-#define ANYKS_ASC_VERSION "1.1.3"
+#define ANYKS_ASC_VERSION "1.1.4"
 // Версия словаря
-#define ANYKS_ASC_DICT_VERSION "1.0.0"
+#define ANYKS_ASC_DICT_VERSION "1.0.1"
 // Автор приложения
 #define ANYKS_ASC_AUTHOR "Yuriy Lobarev"
 // Телефон автора
