@@ -1,5 +1,7 @@
 # [Change Log](https://github.com/anyks/asc/archive/release.tar.gz)
 
+## [1.1.8](https://github.com/anyks/asc/archive/v1.1.8.tar.gz) Bug fixes
+
 ## [1.1.7](https://github.com/anyks/asc/archive/v1.1.7.tar.gz) Bug fixes
 
 ## [1.1.6](https://github.com/anyks/asc/archive/v1.1.6.tar.gz) Bug fixes

@@ -169,8 +169,14 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 				if(it != this->sequence.end()){
 					// Сбрасываем буфер
 					var1 = {};
+					// Если предыдущий вариант существовал, восстанавливаем его
+					if(var2.buffer.test(4)){
+						// Сбрасываем второй рейтинг
+						var2.buffer.reset();
+						// Восстанавливаем рейтинг
+						var2.buffer.set(4);
 					// Сбрасываем второй рейтинг
-					var2.buffer.reset();
+					} else var2.buffer.reset();
 					// Получаем последовательность
 					seq = const_cast <vector <size_t> *> (&it->second);
 					// Получаем количество слов в списке
@@ -344,12 +350,12 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 										var2.buffer.reset(3);
 										// Запоминаем предыдущее значение частоты
 										logprob = var2.logprob;
-										// Запоминаем частоту последовательности
-										var1.logprob = ppl.logprob;
 									// Устанавливаем также рейтинг предыдущего варианта
 									} else var2.buffer.set(3);
 									// Устанавливаем значение рейтинга
 									var1.buffer.set(3);
+									// Запоминаем частоту последовательности
+									var1.logprob = ppl.logprob;
 								// Устанавливаем рейтинг предыдущего варианта
 								} else var2.buffer.set(3);
 								// Если частоты, псевдо-одинаковые, выполняем коррекцию
@@ -371,6 +377,16 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 									var1.lev = item.second.lev;
 									// Запоминаем вес слов
 									var1.wltf = item.second.wltf;
+								// Устанавливаем предыдущие значения
+								} else {
+									// Запоминаем значение Танимото
+									var1.tmo = var2.tmo;
+									// Запоминаем дистанцию Левенштейна
+									var1.lev = var2.lev;
+									// Запоминаем вес слов
+									var1.wltf = var2.wltf;
+									// Запоминаем частоту последовательности
+									var1.logprob = var2.logprob;
 								}
 								// Выводим отладочную информацию о текущем варианте
 								printFn(item.second.wltf, ppl.logprob, item.second.tmo, item.second.lev, * seq);

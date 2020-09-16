@@ -9,7 +9,7 @@
 // Название языковой модели
 #define ANYKS_ASC_NAME "asc"
 // Версия приложения
-#define ANYKS_ASC_VERSION "1.1.7"
+#define ANYKS_ASC_VERSION "1.1.8"
 // Версия словаря
 #define ANYKS_ASC_DICT_VERSION "1.0.1"
 // Автор приложения
