@@ -169,6 +169,8 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 				if(it != this->sequence.end()){
 					// Сбрасываем буфер
 					var1 = {};
+					// Сбрасываем второй рейтинг
+					var2.buffer.reset();
 					// Получаем последовательность
 					seq = const_cast <vector <size_t> *> (&it->second);
 					// Получаем количество слов в списке
@@ -192,12 +194,17 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 							// Если вес слов больше предыдущего
 							if(item.second.wltf >= var2.wltf){
 								// Снимаем рейтинг предыдущего варианта
-								if(item.second.wltf > var2.wltf) var2.buffer.reset(0);
-								// Запоминаем вес слов
-								var1.wltf = item.second.wltf;
+								if(item.second.wltf > var2.wltf)
+									// Устанавливаем рейтинг текущего варианта
+									var2.buffer.reset(0);
+								// Устанавливаем также рейтинг предыдущего варианта
+								else var2.buffer.set(0);
 								// Устанавливаем значение рейтинга
 								var1.buffer.set(0);
-							}
+								// Запоминаем вес слов
+								var1.wltf = item.second.wltf;
+							// Устанавливаем рейтинг предыдущего варианта
+							} else var2.buffer.set(0);
 							// Учитываем коэффициенты, только если они переданы переданы
 							if((item.second.lev != 0) && (item.second.tmo != 0.0)){
 								// Если значение Танимото больше предыдущего
@@ -208,12 +215,19 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 										var2.buffer.reset(1);
 										// Запоминаем вес слов
 										var1.wltf = item.second.wltf;
+									// Запоминаем предыдущее значение рейтинга слова
+									} else {
+										// Устанавливаем также рейтинг предыдущего варианта
+										var2.buffer.set(1);
+										// Запоминаем предыдущее значение рейтинга слова
+										var1.wltf = var2.wltf;
 									}
 									// Устанавливаем значение рейтинга
 									var1.buffer.set(1);
 									// Запоминаем значение Танимото
 									var1.tmo = item.second.tmo;
-								}
+								// Устанавливаем рейтинг предыдущего варианта
+								} else var2.buffer.set(1);
 							}
 						// Если - это одиночное слово
 						} else {
@@ -222,12 +236,17 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 								// Если значение Танимото больше предыдущего
 								if(item.second.tmo >= var2.tmo){
 									// Снимаем рейтинг предыдущего варианта
-									if(item.second.tmo > var2.tmo) var2.buffer.reset(0);
+									if(item.second.tmo > var2.tmo)
+										// Устанавливаем рейтинг текущего варианта
+										var2.buffer.reset(0);
+									// Устанавливаем также рейтинг предыдущего варианта
+									else var2.buffer.set(0);
 									// Устанавливаем значение рейтинга
 									var1.buffer.set(0);
 									// Запоминаем значение Танимото
 									var1.tmo = item.second.tmo;
-								}
+								// Устанавливаем рейтинг предыдущего варианта
+								} else var2.buffer.set(0);
 							}
 							// Если вес слов больше предыдущего
 							if(item.second.wltf >= var2.wltf){
@@ -237,12 +256,19 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 									var2.buffer.reset(1);
 									// Запоминаем значение Танимото
 									var1.tmo = item.second.tmo;
+								// Запоминаем предыдущее значение Танимото
+								} else {
+									// Устанавливаем также рейтинг предыдущего варианта
+									var2.buffer.set(1);
+									// Устанавливаем предыдущее значение Танимота
+									var1.tmo = var2.tmo;
 								}
 								// Устанавливаем значение рейтинга
 								var1.buffer.set(1);
 								// Запоминаем вес слов
 								var1.wltf = item.second.wltf;
-							}
+							// Устанавливаем рейтинг предыдущего варианта
+							} else var2.buffer.set(1);
 						}
 						// Учитываем коэффициенты, только если они переданы переданы
 						if((item.second.lev != 0) && (item.second.tmo != 0.0)){
@@ -256,12 +282,21 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 									var1.tmo = item.second.tmo;
 									// Запоминаем вес слов
 									var1.wltf = item.second.wltf;
+								// Если расстояние Левенштейна такое-же
+								} else {
+									// Устанавливаем также рейтинг предыдущего варианта
+									var2.buffer.set(2);
+									// Запоминаем предыдущее значение Танимото
+									var1.tmo = var2.tmo;
+									// Запоминаем предыдущий рейтинг слова
+									var1.wltf = var2.wltf;
 								}
 								// Устанавливаем значение рейтинга
 								var1.buffer.set(2);
 								// Запоминаем дистанцию Левенштейна
 								var1.lev = item.second.lev;
-							}
+							// Устанавливаем рейтинг предыдущего варианта
+							} else var2.buffer.set(2);
 						}
 						// Если последовательность существует
 						if(exist && !onewrd){
@@ -311,10 +346,12 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 										logprob = var2.logprob;
 										// Запоминаем частоту последовательности
 										var1.logprob = ppl.logprob;
-									}
+									// Устанавливаем также рейтинг предыдущего варианта
+									} else var2.buffer.set(3);
 									// Устанавливаем значение рейтинга
 									var1.buffer.set(3);
-								}
+								// Устанавливаем рейтинг предыдущего варианта
+								} else var2.buffer.set(3);
 								// Если частоты, псевдо-одинаковые, выполняем коррекцию
 								if(((max(var1.logprob, logprob) - min(var1.logprob, logprob)) < 0.09) && mode1 && mode2){
 									// Запоминаем значение второго буфера
