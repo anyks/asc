@@ -14,7 +14,7 @@
 - [Testing](https://github.com/anyks/asc#testing)
     - [Files used for testing](https://github.com/anyks/asc#files-used-for-testing)
 - [File formats](https://github.com/anyks/asc#file-formats)
-    - [Arpa](https://github.com/anyks/asc#arpa)
+    - [ARPA](https://github.com/anyks/asc#arpa)
     - [Vocab](https://github.com/anyks/asc#vocab)
         - [Description](https://github.com/anyks/asc#description)
     - [File containing similar letters encountered in different dictionaries](https://github.com/anyks/asc#file-containing-similar-letters-encountered-in-different-dictionaries)
@@ -126,7 +126,7 @@ I think it is unnecessary to add any other data. Anyone can repeat the test if t
 
 ## File formats
 
-### Arpa
+### ARPA
 ```
 \data\
 ngram 1=52
