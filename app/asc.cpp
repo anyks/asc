@@ -5409,6 +5409,35 @@ int main(int argc, char * argv[]) noexcept {
 							// Очищаем предыдущий прогресс-бар
 							pss.clear();
 							// Устанавливаем заголовки прогресс-бара
+							pss.title("Read language model", "Read language model, is done");
+							// Выводим индикатор прогресс-бара
+							switch(debug){
+								case 1: pss.update(); break;
+								case 2: pss.status(); break;
+							}
+						}
+						// Устанавливаем размер N-граммы
+						alm->setSize(toolkit.getSize());
+						// Выполняем извлечение языковой модели
+						toolkit.saveArpa([&](const vector <char> & buffer, const u_short status){
+							// Устанавливаем данные языковой модели
+							alm->setBin(buffer);
+							// Отображаем ход процесса
+							switch(debug){
+								case 1: pss.update(status); break;
+								case 2: pss.status(status); break;
+							}
+						}, true);
+						// Отображаем ход процесса
+						switch(debug){
+							case 1: pss.update(100); break;
+							case 2: pss.status(100); break;
+						}
+						// Если отладка включена, выводим индикатор загрузки
+						if(debug > 0){
+							// Очищаем предыдущий прогресс-бар
+							pss.clear();
+							// Устанавливаем заголовки прогресс-бара
 							pss.title("Train dictionary", "Train dictionary, is done");
 							// Выводим индикатор прогресс-бара
 							switch(debug){

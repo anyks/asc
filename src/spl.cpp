@@ -875,7 +875,7 @@ void anyks::ASpell::spell(wstring & text, const u_short options, vector <vector 
 					}
 				}
 				// Если слово не существует, пытаемся его исправить.
-				if(idw == idw_t::NIDW){
+				if((word.length() > 1) && (idw == idw_t::NIDW)){
 					// Очищаем кэш последовательности
 					if(info != nullptr) cache.clear();
 					// Выполняем поиск варианта слова
@@ -1224,7 +1224,7 @@ void anyks::ASpell::analyze(const wstring & text, const u_short options, vector 
 					}
 				}
 				// Если слово не существует, пытаемся его исправить.
-				if(idw == idw_t::NIDW){
+				if((word.length() > 1) && (idw == idw_t::NIDW)){
 					// Очищаем кэш последовательности
 					cache.clear();
 					// Выполняем поиск варианта слова

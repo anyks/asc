@@ -855,92 +855,95 @@ const pair <size_t, size_t> anyks::Dict::find(const word_t & word, dumper_t & dm
 		hypothesis.etalon = word.wreal();
 		// Выполняем получение максимального количества ошибок для слова
 		const u_short errors = this->alphabet->errors(word);
-		/**
-		 * findFn Функция извлечения слова из базы
-		 * @param idw идентификатор слова
-		 */
-		auto findFn = [&](const size_t idw){
-			// Получаем данные слова
-			auto it = this->words.find(idw);
-			// Если такое слово существует
-			if(it != this->words.end()){
-				// Выполняем блокировки потока
-				this->locker.lock();
-				// Устанавливаем идентификатор гипотезы
-				hypothesis.idw = idw;
-				// Получаем дистанцию
-				hypothesis.lev = (errors > 1 ? algorithms.distance(word, it->second) : algorithms.damerau(word, it->second));
-				// Отфильтровываем ненужные нам слова
-				if(!it->second.empty() && (hypothesis.lev <= errors)){
-					// Извлекаем слово из списка
-					hypothesis.word = it->second;
-					// Устанавливаем значение Танимото
-					hypothesis.tmo = algorithms.tanimoto(word, hypothesis.word);
-					// Если расстояние Левенштейна слишком большое, тогда Танимото должен быть больше 4.0
-					if((hypothesis.lev <= 3) || (hypothesis.tmo >= 0.4)){
-						// Если вывод отладочной информации разрешён
-						if(this->isOption(options_t::debug)){
-							// Выводим основное сообщение отладки
-							this->alphabet->log("find word: [%s => %s]\r\n", alphabet_t::log_t::info, this->logfile, word.real().c_str(), hypothesis.word.real().c_str());
-						}
-						// Добавляем вариант в дампер
-						const auto & res = dmp.smart(hypothesis, size);
-						// Если вариант добавлен, запоминаем позицию
-						if(res.second > 0){
-							// Увеличиваем количество добавленных вариантов
-							result.second++;
-							// Запоминаем новую позицию
-							result.first = res.first;
+		// Если количество ошибок больше 0
+		if(errors > 0){
+			/**
+			 * findFn Функция извлечения слова из базы
+			 * @param idw идентификатор слова
+			 */
+			auto findFn = [&](const size_t idw){
+				// Получаем данные слова
+				auto it = this->words.find(idw);
+				// Если такое слово существует
+				if(it != this->words.end()){
+					// Выполняем блокировки потока
+					this->locker.lock();
+					// Устанавливаем идентификатор гипотезы
+					hypothesis.idw = idw;
+					// Получаем дистанцию
+					hypothesis.lev = (errors > 1 ? algorithms.distance(word, it->second) : algorithms.damerau(word, it->second));
+					// Отфильтровываем ненужные нам слова
+					if(!it->second.empty() && (hypothesis.lev <= errors)){
+						// Извлекаем слово из списка
+						hypothesis.word = it->second;
+						// Устанавливаем значение Танимото
+						hypothesis.tmo = algorithms.tanimoto(word, hypothesis.word);
+						// Если расстояние Левенштейна слишком большое, тогда Танимото должен быть больше 4.0
+						if((hypothesis.lev <= 3) || (hypothesis.tmo >= 0.4)){
+							// Если вывод отладочной информации разрешён
+							if(this->isOption(options_t::debug)){
+								// Выводим основное сообщение отладки
+								this->alphabet->log("find word: [%s => %s]\r\n", alphabet_t::log_t::info, this->logfile, word.real().c_str(), hypothesis.word.real().c_str());
+							}
+							// Добавляем вариант в дампер
+							const auto & res = dmp.smart(hypothesis, size);
+							// Если вариант добавлен, запоминаем позицию
+							if(res.second > 0){
+								// Увеличиваем количество добавленных вариантов
+								result.second++;
+								// Запоминаем новую позицию
+								result.first = res.first;
+							}
 						}
 					}
+					// Выполняем разблокировки потока
+					this->locker.unlock();
 				}
-				// Выполняем разблокировки потока
-				this->locker.unlock();
-			}
-		};
-		// Если нужно выполнять исправление опечаток
-		if(this->isOption(options_t::onlytypos)){
-			// Получаем список всех возможных векторов слова
-			auto vectors = this->vecsb(word);
-			// Если список получен
-			if(!vectors.empty()){
-				// Выполняем инициализацию пула потоков
-				this->start();
-				// Переходим по всему списку векторов
-				for(auto & vector : vectors){
-					// Получаем диапазон значений вектора
-					auto ret = this->vectors.equal_range(vector);
-					// Перебираем весь диапазон полученных векторов
-					for(auto it = ret.first; it != ret.second; ++it){
-						// Выполняем добавление полученного слова
-						this->tpool->push(findFn, it->second);
-					}
-				}
-				// Ожидаем завершения работы всех потоков
-				this->finish();
-			}
-		// Если hnsw загружен
-		} else if(!this->hnsw.empty()) {
-			// Создаёс эмбеддинг слова
-			const auto & embedding = this->vec(word);
-			// Если эмбеддинг получен
-			if(!embedding.empty()){
-				// Множитель для расчёта максимального количества вариантов
-				vector <double> factor = {0.25, 0.5, 0.75, 1};
-				// Получаем количество элементов для выдачи
-				const size_t count = pow(10, floor(log10(words.size())));
-				// Получаем количество максимаольно-возможных вариантов для рассмотрения
-				const size_t nswlibCount = (factor.at(errors - 1) * this->nswlibCount);
-				// Запрашиваем nswlibCount вариантов
-				const auto & res = this->hnsw.query({embedding}, (count < nswlibCount ? count : nswlibCount));
-				// Если список вариантов получен
-				if(!res.first.empty()){
+			};
+			// Если нужно выполнять исправление опечаток
+			if(this->isOption(options_t::onlytypos)){
+				// Получаем список всех возможных векторов слова
+				auto vectors = this->vecsb(word);
+				// Если список получен
+				if(!vectors.empty()){
 					// Выполняем инициализацию пула потоков
 					this->start();
-					// Переходим по всему списку вариантов
-					for(auto & idw : res.first) this->tpool->push(findFn, idw);
+					// Переходим по всему списку векторов
+					for(auto & vector : vectors){
+						// Получаем диапазон значений вектора
+						auto ret = this->vectors.equal_range(vector);
+						// Перебираем весь диапазон полученных векторов
+						for(auto it = ret.first; it != ret.second; ++it){
+							// Выполняем добавление полученного слова
+							this->tpool->push(findFn, it->second);
+						}
+					}
 					// Ожидаем завершения работы всех потоков
 					this->finish();
+				}
+			// Если hnsw загружен
+			} else if(!this->hnsw.empty()) {
+				// Создаёс эмбеддинг слова
+				const auto & embedding = this->vec(word);
+				// Если эмбеддинг получен
+				if(!embedding.empty()){
+					// Множитель для расчёта максимального количества вариантов
+					vector <double> factor = {0.25, 0.5, 0.75, 1};
+					// Получаем количество элементов для выдачи
+					const size_t count = pow(10, floor(log10(words.size())));
+					// Получаем количество максимаольно-возможных вариантов для рассмотрения
+					const size_t nswlibCount = (factor.at(errors - 1) * this->nswlibCount);
+					// Запрашиваем nswlibCount вариантов
+					const auto & res = this->hnsw.query({embedding}, (count < nswlibCount ? count : nswlibCount));
+					// Если список вариантов получен
+					if(!res.first.empty()){
+						// Выполняем инициализацию пула потоков
+						this->start();
+						// Переходим по всему списку вариантов
+						for(auto & idw : res.first) this->tpool->push(findFn, idw);
+						// Ожидаем завершения работы всех потоков
+						this->finish();
+					}
 				}
 			}
 		}
