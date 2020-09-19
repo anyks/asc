@@ -185,6 +185,13 @@ const pair <size_t, const anyks::Dumper::awrd_t *> anyks::Dumper::best() const n
 					if(!onewrd) onewrd = (count == 1);
 					// Выполняем проверку существования N-граммы
 					if(!onewrd) exist = this->alm->check(* seq, (u_short) 2);
+					// Если это - лучший вариант
+					if(item.second.lev == 0){
+						// Запоминаем, что вариант существует
+						exist = true;
+						// Устанавливаем флаг
+						var1.buffer.set(4);
+					}
 					// if(!onewrd) exist = this->alm->check(* seq, u_short((size > 3) && (count > 3) ? 3 : 2));
 					// Если предыдущий вариант существовал, то и текущий тоже должен существовать
 					if((var2.buffer.test(4) && exist) || onewrd || !var2.buffer.test(4)){
