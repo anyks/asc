@@ -461,7 +461,7 @@ void anyks::ASCb::read() noexcept {
 					// Извлекаем дамп словаря
 					this->aspl->get(this->alphabet->format("alm_%zu", i), buffer, encrypted);
 					// Если буфер данных существует
-					if(!buffer.empty()) this->alm->setBin(buffer);
+					if(!buffer.empty()) (isALm2 ? this->alm->setBin2(buffer) : this->alm->setBin(buffer));
 					// Если отладка включена
 					if(this->debug > 0){
 						// Подсчитываем статус выполнения
