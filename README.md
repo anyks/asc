@@ -103,6 +103,8 @@ $ make
 | [mkneserney-3-middle.asc](https://cloud.mail.ru/public/3SBP/35WJFKFyd) | 1.33        | 9.7                     | 3              | RU       |
 | [wittenbell-3-single.asc](https://cloud.mail.ru/public/21jt/YEW493XQa) | 0.772       | 5.14                    | 3              | RU       |
 | [wittenbell-5-single.asc](https://cloud.mail.ru/public/5Adc/5x5Ea1eA6) | 1.37        | 10.7                    | 5              | RU       |
+| [wittenbell-5-big.asc](https://cloud.mail.ru/public/ukpb/NTVQgZ9pR)    | 9.76        | 22.1                    | 5              | RU       |
+| [wittenbell-3-single.asc](https://cloud.mail.ru/public/6frp/x6PoNDpay) | 2.33        | 6.15                    | 3              | EN       |
 
 ## Testing
 
