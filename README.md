@@ -74,23 +74,18 @@ $ python3 -m pip install anyks-sc
 $ git clone --recursive https://github.com/anyks/asc.git
 ```
 
-### Linux and FreeBSD
+### Build third party
+```bash
+$ ./build_third_party.sh
+```
+
+### Linux/MacOS X and FreeBSD
 
 ```bash
 $ mkdir ./build
 $ cd ./build
 
 $ cmake ..
-$ make
-```
-
-### MacOS X
-
-```bash
-$ mkdir ./build
-$ cd ./build
-
-$ cmake -DOPENSSL_ROOT_DIR=/usr/local/Cellar/openssl@1.1/1.1.1g -DOPENSSL_LIBRARIES=/usr/local/Cellar/openssl@1.1/1.1.1g/include/lib ..
 $ make
 ```
 

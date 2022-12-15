@@ -5,6 +5,8 @@
 
 # Node artifact files
 node_modules/
+third_party/
+build/
 dist/
 bin/
 
